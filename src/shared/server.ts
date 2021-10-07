@@ -1,9 +1,10 @@
-import express, { request, response } from 'express';
+import 'reflect-metadata';
+import express from 'express';
 import cors from 'cors';
 
 import { routes } from './routes';
 
-import prisma from './db/prisma';
+import './container';
 
 const app = express();
 
