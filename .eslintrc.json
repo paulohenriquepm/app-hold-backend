@@ -43,14 +43,14 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": [["module"], ["parent"], ["sibling", "index"]],
-        "alphabetize": { "order": "ignore", "ignoreCase": true }
+        "groups": ["module", "/^@/", "parent", "sibling", "index"],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ]
   },
   "settings": {
     "import/resolver": {
-      "typescript": {}
+      "babel-module": {}
     }
   }
 }
