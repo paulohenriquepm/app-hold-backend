@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
-
-import { UsersRepository } from '@modules/users/repositories/implementations/UsersRepository';
+import { hash } from 'bcryptjs';
 
 import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
+import { AppError } from '@shared/errors/AppError';
 
 @injectable()
 class CreateUserUseCase {
@@ -13,11 +13,21 @@ class CreateUserUseCase {
   ) {}
 
   async execute({ name, email, password }: ICreateUserDTO) {
-    await this.usersRepository.create({
+    const userExists = await this.usersRepository.findByEmail(email);
+
+    if (userExists) throw new AppError('E-mail já está em uso');
+
+    const encryptedPassword = hash(password, 8);
+
+    const user = await this.usersRepository.create({
       name,
       email,
-      password,
+      password: encryptedPassword,
     });
+
+    delete user.password;
+
+    return user;
   }
 }
 
