@@ -1,6 +1,6 @@
 FROM node
 
-WORKDIR /app
+WORKDIR /test
 
 COPY package.json ./
 
@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . ./
 
-ENTRYPOINT ["sh", "./entrypoints/app-entrypoint.sh"]
+ENTRYPOINT ["sh", "./entrypoints/test-entrypoint.sh"]
 
 EXPOSE 3333
 

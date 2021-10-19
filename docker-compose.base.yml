@@ -1,0 +1,30 @@
+services:
+  database:
+    image: postgres
+    container_name: database_apphold
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: apphold
+    volumes:
+      - pgdata:/data/posgres
+
+  database_test:
+    image: postgres
+    container_name: database_apphold
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: apphold_test
+    volumes:
+      - pgdata:/data/posgres
+
+volumes:
+  pgdata:
+    driver: local

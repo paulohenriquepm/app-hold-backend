@@ -1,5 +1,6 @@
 node_modules
-.env
+.env.development
+.env.test
 package-lock.json
 .vscode
 dist

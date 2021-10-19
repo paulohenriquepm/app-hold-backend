@@ -1,19 +1,21 @@
 services:
-  app:
-    build: .
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: apphold_test
     depends_on:
       - database
+    env_file: .env.test
     ports:
       - 3333:3333
     volumes:
-      - .:/app
-    env_file: .env.development
-    container_name: apphold
+      - .:/usr/app
 
   database:
     extends:
       file: docker-compose.base.yml
-      service: database
+      service: database_test
 
 volumes:
   pgdata:
