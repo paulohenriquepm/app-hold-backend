@@ -1,6 +1,8 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on:
       - database
     ports:
@@ -9,11 +11,12 @@ services:
       - .:/app
     env_file: .env.development
     container_name: apphold
+    entrypoint: sh ./entrypoints/app-entrypoint.sh
 
   database:
     extends:
       file: docker-compose.base.yml
-      service: database
+      service: database_development
 
 volumes:
   pgdata:

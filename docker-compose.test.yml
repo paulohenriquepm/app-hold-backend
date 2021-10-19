@@ -2,8 +2,7 @@ services:
   test:
     build:
       context: .
-      dockerfile: Dockerfile.test
-    container_name: apphold_test
+      dockerfile: Dockerfile
     depends_on:
       - database
     env_file: .env.test
@@ -11,6 +10,8 @@ services:
       - 3333:3333
     volumes:
       - .:/usr/app
+    container_name: apphold_test
+    entrypoint: sh ./entrypoints/test-entrypoint.sh
 
   database:
     extends:

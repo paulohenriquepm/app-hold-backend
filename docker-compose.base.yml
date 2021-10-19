@@ -1,5 +1,5 @@
 services:
-  database:
+  database_development:
     image: postgres
     container_name: database_apphold
     restart: always
@@ -8,9 +8,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: apphold
+      POSTGRES_DB: apphold_development
     volumes:
-      - pgdata:/data/posgres
+      - pgdata:/data/postgres
 
   database_test:
     image: postgres
@@ -23,7 +23,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: apphold_test
     volumes:
-      - pgdata:/data/posgres
+      - pgdata:/data/postgres
 
 volumes:
   pgdata:
