@@ -6,20 +6,23 @@
   "scripts": {
     "dev": "tsnd -r tsconfig-paths/register --inspect --ignore-watch node_modules --transpile-only --respawn src/shared/server.ts",
     "build": "tsc",
-    "test": "jest"
+    "test": "jest -i"
   },
   "dependencies": {
     "@prisma/client": "^3.2.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
     "reflect-metadata": "^0.1.13",
+    "supertest": "^6.1.6",
     "tsyringe": "^4.6.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.0.2",
+    "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^14.2.1",
