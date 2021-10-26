@@ -1,17 +1,20 @@
-import { UsersRepository } from '@modules/users/repositories/implementations/UsersRepository';
+import { FakeUsersRepository } from '@modules/users/repositories/fakes/fakeUsersRepository';
 import { CreateUserUseCase } from '@modules/users/useCases/createUser/createUserUseCase';
 
 import { AppError } from '@shared/errors/AppError';
+import { UserFactory } from '@factories/userFactory';
 
-let usersRepository: UsersRepository;
+let fakeUsersRepository: FakeUsersRepository;
 
 let createUserUseCase: CreateUserUseCase;
+let userFactory: UserFactory;
 
 describe('createUserUseCase', () => {
   beforeEach(() => {
-    usersRepository = new UsersRepository();
+    fakeUsersRepository = new FakeUsersRepository();
 
-    createUserUseCase = new CreateUserUseCase(usersRepository);
+    createUserUseCase = new CreateUserUseCase(fakeUsersRepository);
+    userFactory = new UserFactory(fakeUsersRepository);
   });
 
   it('should be able to create a new user', async () => {
@@ -27,22 +30,16 @@ describe('createUserUseCase', () => {
   });
 
   it('should be not be able to create a new user with an existing email', async () => {
-    const firstUserParams = {
+    userFactory.create({
       email: 'foo@bar.com',
-      name: 'First Foo Bar',
-      password: 'foobar123',
-    };
-
-    await createUserUseCase.execute(firstUserParams);
-
-    const secondUserParams = {
-      email: 'foo@bar.com',
-      name: 'Second Foo Bar',
-      password: 'foobar123',
-    };
+    });
 
     await expect(
-      createUserUseCase.execute(secondUserParams),
+      createUserUseCase.execute({
+        email: 'foo@bar.com',
+        name: 'Second Foo Bar',
+        password: 'foobar123',
+      }),
     ).rejects.toBeInstanceOf(AppError);
   });
 });

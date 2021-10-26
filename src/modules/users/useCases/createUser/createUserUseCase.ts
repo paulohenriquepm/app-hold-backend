@@ -1,14 +1,15 @@
-import { inject, injectable } from 'tsyringe';
+import { inject, singleton } from 'tsyringe';
 import { hash } from 'bcryptjs';
 
 import { User } from '.prisma/client';
 
-import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
-import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
 import { AppError } from '@shared/errors/AppError';
+import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
+import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO';
+import { ICreateUserUseCase } from './ICreateUserUseCase';
 
-@injectable()
-class CreateUserUseCase {
+@singleton()
+class CreateUserUseCase implements ICreateUserUseCase {
   constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,

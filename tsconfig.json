@@ -8,7 +8,8 @@
     "baseUrl": "./src",
     "paths": {
       "@modules/*": ["modules/*"],
-      "@shared/*": ["shared/*"]
+      "@shared/*": ["shared/*"],
+      "@factories/*": ["../spec/factories/*"]
     },
     "outDir": "dist",
     "esModuleInterop": true,
