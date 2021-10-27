@@ -1,9 +1,10 @@
 import { User } from '@prisma/client';
 
-import { ICreateUserDTO } from '../../dtos/ICreateUserDTO';
-import { IUsersRepository } from '../IUsersRepository';
-
 import prisma from '@shared/db/prisma';
+
+import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO';
+
+import { IUsersRepository } from '../IUsersRepository';
 
 class UsersRepository implements IUsersRepository {
   async findByEmail(email: string): Promise<User> {

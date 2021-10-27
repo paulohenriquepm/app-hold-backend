@@ -15,8 +15,7 @@
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "reflect-metadata": "^0.1.13",
-    "supertest": "^6.1.6",
-    "tsyringe": "^4.6.0"
+    "supertest": "^6.1.6"
   },
   "devDependencies": {
     "@types/chance": "^1.1.3",
