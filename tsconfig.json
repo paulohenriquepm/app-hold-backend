@@ -9,7 +9,8 @@
     "paths": {
       "@modules/*": ["modules/*"],
       "@shared/*": ["shared/*"],
-      "@factories/*": ["../spec/factories/*"]
+      "@factories/*": ["../spec/factories/*"],
+      "@utils/*": ["../spec/utils/*"]
     },
     "outDir": "dist",
     "esModuleInterop": true,
