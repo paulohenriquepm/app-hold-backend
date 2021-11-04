@@ -1,4 +1,5 @@
 import { User } from '@prisma/client';
+import { hash } from 'bcryptjs';
 
 import { ICreateUserDTO } from '@modules/users/dtos/ICreateUserDTO';
 import { IUsersRepository } from '../IUsersRepository';
@@ -15,11 +16,13 @@ class FakeUsersRepository implements IUsersRepository {
   async create({ name, email, password }: ICreateUserDTO): Promise<User> {
     const user: User = {} as User;
 
+    const encryptedPassword = await hash(password, 8);
+
     Object.assign(user, {
       id: this.users.length + 1,
       name,
       email,
-      password,
+      password: encryptedPassword,
     });
 
     this.users.push(user);

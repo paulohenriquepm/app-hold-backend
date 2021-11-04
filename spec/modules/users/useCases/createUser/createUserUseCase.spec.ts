@@ -30,7 +30,7 @@ describe('createUserUseCase', () => {
   });
 
   it('should be not be able to create a new user with an existing email', async () => {
-    userFactory.create({
+    await userFactory.create({
       email: 'foo@bar.com',
     });
 
