@@ -1,0 +1,3 @@
+const next = () => {};
+
+export { next };
