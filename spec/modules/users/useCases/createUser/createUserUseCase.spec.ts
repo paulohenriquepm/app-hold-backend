@@ -3,6 +3,16 @@ import { CreateUserUseCase } from '@modules/users/useCases/createUser/createUser
 
 import { AppError } from '@shared/errors/AppError';
 import { UserFactory } from '@factories/userFactory';
+import { CreateUsersWalletUseCase } from '@modules/usersWallet/useCases/createUsersWallet/createUsersWalletUseCase';
+
+jest.mock(
+  '@modules/usersWallet/useCases/createUsersWallet/createUsersWalletUseCase',
+);
+
+const CreateUsersWalletUseCaseMock =
+  CreateUsersWalletUseCase as jest.Mock<CreateUsersWalletUseCase>;
+const createUsersWalletUseCaseMock =
+  new CreateUsersWalletUseCaseMock() as jest.Mocked<CreateUsersWalletUseCase>;
 
 let fakeUsersRepository: FakeUsersRepository;
 
@@ -13,7 +23,11 @@ describe('createUserUseCase', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
 
-    createUserUseCase = new CreateUserUseCase(fakeUsersRepository);
+    createUserUseCase = new CreateUserUseCase(
+      fakeUsersRepository,
+      createUsersWalletUseCaseMock,
+    );
+
     userFactory = new UserFactory(fakeUsersRepository);
   });
 
@@ -27,6 +41,7 @@ describe('createUserUseCase', () => {
     const createdUser = await createUserUseCase.execute(params);
 
     expect(createdUser).toHaveProperty('id');
+    expect(createUsersWalletUseCaseMock.execute).toHaveBeenCalled();
   });
 
   it('should be not be able to create a new user with an existing email', async () => {

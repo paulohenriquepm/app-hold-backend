@@ -2,7 +2,7 @@ import { UserFactory } from '@factories/userFactory';
 import { UsersWalletFactory } from '@factories/usersWalletFactory';
 import { FakeUsersRepository } from '@modules/users/repositories/fakes/fakeUsersRepository';
 import { FakeUsersWalletRepository } from '@modules/usersWallet/repositories/fakes/fakeUsersWalletRepository';
-import { CreateUsersWalletUseCase } from '@modules/usersWallet/useCases/createUsersWallet/createUsersWalletCase';
+import { CreateUsersWalletUseCase } from '@modules/usersWallet/useCases/createUsersWallet/createUsersWalletUseCase';
 import { AppError } from '@shared/errors/AppError';
 
 let fakeUsersRepository: FakeUsersRepository;

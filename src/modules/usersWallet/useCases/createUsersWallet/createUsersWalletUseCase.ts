@@ -1,7 +1,7 @@
 import { UsersWallet } from '.prisma/client';
 
 import { AppError } from '@shared/errors/AppError';
-import { ICreateUsersWalletUseCase } from './ICreateUsersWalletCase';
+import { ICreateUsersWalletUseCase } from './ICreateUsersWalletUseCase';
 import { IUsersWalletRepository } from '@modules/usersWallet/repositories/IUsersWalletRepository';
 
 class CreateUsersWalletUseCase implements ICreateUsersWalletUseCase {
