@@ -1,7 +1,7 @@
 import { UserFactory } from '@factories/userFactory';
 import { UsersRepository } from '@modules/users/repositories/implementations/UsersRepository';
 
-import { UsersWalletFactory } from '@factories/userWalletFactory';
+import { UsersWalletFactory } from '@factories/usersWalletFactory';
 import { UsersWalletRepository } from '@modules/usersWallet/repositories/implementations/UsersWalletRepository';
 
 const usersRepository = new UsersRepository();
