@@ -1,5 +1,5 @@
 import { UserFactory } from '@factories/userFactory';
-import { UsersRepository } from '@modules/users/repositories/implementations/UsersRepository';
+import { UsersRepository } from '@modules/users/repositories/implementations/usersRepository';
 
 import { UsersWalletFactory } from '@factories/usersWalletFactory';
 import { UsersWalletRepository } from '@modules/usersWallet/repositories/implementations/UsersWalletRepository';

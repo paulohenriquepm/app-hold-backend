@@ -11,19 +11,39 @@ generator client {
 }
 
 model User {
-  id        Int          @id @default(autoincrement())
-  name      String
-  email     String
-  password  String
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  wallet    UsersWallet?
+  id         Int          @id @default(autoincrement())
+  name       String
+  email      String
+  password   String
+  created_at DateTime     @default(now())
+  updated_at DateTime     @updatedAt
+  wallet     UsersWallet?
 }
 
 model UsersWallet {
-  id        Int      @id @default(autoincrement())
-  userId    Int      @unique
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  userId     Int      @unique
+  user       User     @relation(fields: [userId], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model Asset {
+  id                      Int      @id @default(autoincrement())
+  name                    String
+  logo                    String
+  b3_ticket               String
+  api_ticket              String
+  sector                  String
+  address                 String
+  city                    String
+  state                   String
+  country                 String
+  website                 String
+  employees               Int
+  ceo                     String
+  created_at              DateTime @default(now())
+  updated_at              DateTime @updatedAt
+  last_time_data_updated  DateTime @default(now())
+  last_time_price_updated DateTime @default(now())
 }

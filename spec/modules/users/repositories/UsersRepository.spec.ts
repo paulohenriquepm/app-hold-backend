@@ -1,5 +1,5 @@
 import { UserFactory } from '@factories/userFactory';
-import { UsersRepository } from '@modules/users/repositories/implementations/UsersRepository';
+import { UsersRepository } from '@modules/users/repositories/implementations/usersRepository';
 
 const usersRepository = new UsersRepository();
 const userFactory = new UserFactory(usersRepository);
