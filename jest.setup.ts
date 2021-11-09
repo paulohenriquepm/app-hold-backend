@@ -5,6 +5,7 @@ const dropDatabase = () => {
   return Promise.all([
     prisma.usersWallet.deleteMany(),
     prisma.user.deleteMany(),
+    prisma.asset.deleteMany(),
   ]);
 };
 
