@@ -1,7 +1,9 @@
+import { AppError } from '@shared/errors/AppError';
+
 import { AssetFactory } from '@factories/assetFactory';
+
 import { AssetsRepository } from '@modules/assets/repositories/implementations/assetsRepository';
 import { CreateAssetUseCase } from '@modules/assets/useCases/createAsset/createAssetUseCase';
-import { AppError } from '@shared/errors/AppError';
 
 let assetRepository: AssetsRepository;
 let assetFactory: AssetFactory;

@@ -16,6 +16,21 @@ class AssetsRepository implements IAssetsRepository {
     return asset;
   }
 
+  async update(asset_id: number, data: IUpdateAssetDTO): Promise<Asset> {
+    const asset = await prisma.asset
+      .update({
+        where: {
+          id: asset_id,
+        },
+        data,
+      })
+      .catch(() => {
+        throw new AppError(`Não existe nenhum ativo com o id: ${asset_id}`);
+      });
+
+    return asset;
+  }
+
   async findByB3Ticket(b3_ticket: string): Promise<Asset> {
     const asset = await prisma.asset.findFirst({
       where: {
@@ -28,17 +43,15 @@ class AssetsRepository implements IAssetsRepository {
     return asset;
   }
 
-  async update(asset_id: number, data: IUpdateAssetDTO): Promise<Asset> {
-    const asset = await prisma.asset
-      .update({
-        where: {
-          id: asset_id,
-        },
-        data,
-      })
-      .catch(() => {
-        throw new AppError(`Não existe nenhum ativo com o id: ${asset_id}`);
-      });
+  async findById(asset_id: number): Promise<Asset> {
+    const asset = await prisma.asset.findUnique({
+      where: {
+        id: asset_id,
+      },
+    });
+
+    if (!asset)
+      throw new AppError(`Não existe nenhum ativo com o id: ${asset_id}`);
 
     return asset;
   }

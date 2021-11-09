@@ -21,6 +21,34 @@ describe('AssetsRepository', () => {
     });
   });
 
+  describe('update', () => {
+    describe('when assets exists with given id', () => {
+      it('should update the asset', async () => {
+        const createdAsset = await assetFactory.create({
+          name: 'old-name',
+        });
+
+        const upatedAsset = await assetsRepository.update(createdAsset.id, {
+          name: 'new-name',
+        });
+
+        expect(upatedAsset.name).toBe('new-name');
+      });
+    });
+
+    describe('when assets does not exist with given id', () => {
+      it('should raise an AppError', async () => {
+        await expect(
+          assetsRepository.update(123, {
+            name: 'new-name',
+          }),
+        ).rejects.toEqual(
+          new AppError('Não existe nenhum ativo com o id: 123'),
+        );
+      });
+    });
+  });
+
   describe('findByB3Ticket', () => {
     describe('when asset exists with given b3_ticket', () => {
       it('should return the asset', async () => {
@@ -47,28 +75,20 @@ describe('AssetsRepository', () => {
     });
   });
 
-  describe('update', () => {
-    describe('when assets exists with given id', () => {
-      it('should update the asset', async () => {
-        const createdAsset = await assetFactory.create({
-          name: 'old-name',
-        });
+  describe('findById', () => {
+    describe('when asset exists with given id', () => {
+      it('should return the asset', async () => {
+        const createdAsset = await assetFactory.create();
 
-        const upatedAsset = await assetsRepository.update(createdAsset.id, {
-          name: 'new-name',
-        });
+        const foundAsset = await assetsRepository.findById(createdAsset.id);
 
-        expect(upatedAsset.name).toBe('new-name');
+        expect(foundAsset.id).toBe(createdAsset.id);
       });
     });
 
-    describe('when assets does not exist with given id', () => {
-      it('should raise an AppError', async () => {
-        await expect(
-          assetsRepository.update(123, {
-            name: 'new-name',
-          }),
-        ).rejects.toEqual(
+    describe('when asset does not exist with given b3_ticket', () => {
+      it('should return null', async () => {
+        await expect(assetsRepository.findById(123)).rejects.toEqual(
           new AppError('Não existe nenhum ativo com o id: 123'),
         );
       });
