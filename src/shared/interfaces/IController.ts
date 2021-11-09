@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-interface IAuthenticateUserController {
+interface IController {
   handle(request: Request, response: Response): Promise<Response>;
 }
 
-export { IAuthenticateUserController };
+export { IController };

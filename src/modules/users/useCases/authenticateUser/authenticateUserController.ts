@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
 
-import { IAuthenticateUserController } from './IAuthenticateUserController';
+import { IController } from '@shared/interfaces/IController';
+
 import { IAuthenticateUserUseCase } from './IAuthenticateUserUseCase';
 
-class AuthenticateUserController implements IAuthenticateUserController {
+class AuthenticateUserController implements IController {
   constructor(
     private readonly authenticateUserUseCase: IAuthenticateUserUseCase,
   ) {}
