@@ -1,4 +1,4 @@
-import { Prisma } from '.prisma/client';
+import { User } from '.prisma/client';
 
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
 
@@ -9,16 +9,16 @@ const chance = new Chance();
 class UserFactory {
   constructor(private usersRepository: IUsersRepository) {}
 
-  build(attrs: Partial<Prisma.UserCreateInput> = {}) {
+  build(attrs: Partial<User> = {}) {
     return {
       name: chance.name(),
       email: chance.email(),
       password: chance.guid(),
       ...attrs,
-    } as Prisma.UserCreateInput;
+    } as User;
   }
 
-  create(attrs: Partial<Prisma.UserCreateInput> = {}) {
+  create(attrs: Partial<User> = {}) {
     return this.usersRepository.create(this.build(attrs));
   }
 }

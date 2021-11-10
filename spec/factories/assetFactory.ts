@@ -8,7 +8,7 @@ const chance = new Chance();
 class AssetFactory {
   constructor(private assetsRepository: IAssetsRepository) {}
 
-  build(attrs: Partial<Prisma.AssetCreateInput> = {}) {
+  build(attrs: Partial<Asset> = {}) {
     return {
       name: chance.name(),
       logo: chance.url(),
@@ -23,15 +23,15 @@ class AssetFactory {
       employees: chance.integer(),
       ceo: chance.name(),
       ...attrs,
-    } as Prisma.AssetCreateInput;
+    } as Asset;
   }
 
-  create(attrs: Partial<Prisma.AssetCreateInput> = {}) {
+  create(attrs: Partial<Asset> = {}) {
     return this.assetsRepository.create(this.build(attrs));
   }
 
-  createMany(attrs: Partial<Prisma.AssetCreateInput> = {}, repeat: number = 1) {
-    let assets: Prisma.AssetCreateInput[] = [];
+  createMany(attrs: Partial<Asset> = {}, repeat: number = 1) {
+    let assets: Asset[] = [];
 
     for (let index = 0; index < repeat; index++) {
       assets.push(this.build(attrs[index]));

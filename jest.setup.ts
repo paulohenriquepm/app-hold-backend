@@ -3,9 +3,9 @@ import 'reflect-metadata';
 
 const dropDatabase = () => {
   return Promise.all([
+    prisma.asset.deleteMany(),
     prisma.usersWallet.deleteMany(),
     prisma.user.deleteMany(),
-    prisma.asset.deleteMany(),
   ]);
 };
 

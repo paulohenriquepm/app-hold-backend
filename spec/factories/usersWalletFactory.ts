@@ -1,4 +1,4 @@
-import { Prisma } from '.prisma/client';
+import { Prisma, UsersWallet } from '.prisma/client';
 
 import { IUsersWalletRepository } from '@modules/usersWallet/repositories/IUsersWalletRepository';
 
@@ -7,8 +7,8 @@ class UsersWalletFactory {
 
   build(user_id: number) {
     return {
-      user: user_id,
-    } as Prisma.UsersWalletCreateInput;
+      userId: user_id,
+    } as UsersWallet;
   }
 
   create(user_id: number) {
