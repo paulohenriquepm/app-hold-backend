@@ -1,4 +1,4 @@
-import { Prisma } from '.prisma/client';
+import { Asset, Prisma } from '.prisma/client';
 import { IAssetsRepository } from '@modules/assets/repositories/IAssetsRepository';
 
 import Chance from 'chance';
@@ -28,6 +28,16 @@ class AssetFactory {
 
   create(attrs: Partial<Prisma.AssetCreateInput> = {}) {
     return this.assetsRepository.create(this.build(attrs));
+  }
+
+  createMany(attrs: Partial<Prisma.AssetCreateInput> = {}, repeat: number = 1) {
+    let assets: Prisma.AssetCreateInput[] = [];
+
+    for (let index = 0; index < repeat; index++) {
+      assets.push(this.build(attrs[index]));
+    }
+
+    return this.assetsRepository.createMany(assets);
   }
 }
 

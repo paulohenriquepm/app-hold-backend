@@ -1,4 +1,4 @@
-import { Asset } from '@prisma/client';
+import { Asset, Prisma } from '@prisma/client';
 
 import prisma from '@shared/db/prisma';
 
@@ -16,6 +16,14 @@ class AssetsRepository implements IAssetsRepository {
     return asset;
   }
 
+  async createMany(data: ICreateAssetDTO[]): Promise<Prisma.BatchPayload> {
+    const count = await prisma.asset.createMany({
+      data,
+    });
+
+    return count;
+  }
+
   async update(asset_id: number, data: IUpdateAssetDTO): Promise<Asset> {
     const asset = await prisma.asset
       .update({
@@ -29,6 +37,12 @@ class AssetsRepository implements IAssetsRepository {
       });
 
     return asset;
+  }
+
+  async list(): Promise<Asset[]> {
+    const assets = await prisma.asset.findMany();
+
+    return assets;
   }
 
   async findByB3Ticket(b3_ticket: string): Promise<Asset> {

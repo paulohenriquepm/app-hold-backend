@@ -21,6 +21,32 @@ describe('AssetsRepository', () => {
     });
   });
 
+  describe('list', () => {
+    let countAssets = 3;
+
+    beforeEach(async () => {
+      await assetFactory.createMany({}, countAssets);
+    });
+
+    it('should return a list of assets', async () => {
+      const assets = await assetsRepository.list();
+
+      expect(assets.length).toBe(countAssets);
+    });
+  });
+
+  describe('createMany', () => {
+    it('should create a new asset', async () => {
+      let countAssets = 3;
+
+      await assetFactory.createMany({}, countAssets);
+
+      const assets = await assetsRepository.list();
+
+      expect(assets.length).toBe(countAssets);
+    });
+  });
+
   describe('update', () => {
     describe('when assets exists with given id', () => {
       it('should update the asset', async () => {
