@@ -4,7 +4,6 @@ import { IAssetsRepository } from '@modules/assets/repositories/IAssetsRepositor
 import Chance from 'chance';
 
 const chance = new Chance();
-
 class AssetFactory {
   constructor(private assetsRepository: IAssetsRepository) {}
 

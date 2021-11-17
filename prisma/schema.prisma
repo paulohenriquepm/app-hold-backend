@@ -29,7 +29,7 @@ model UsersWallet {
 }
 
 model Asset {
-  id                      Int      @id @default(autoincrement())
+  id                      Int         @id @default(autoincrement())
   name                    String
   logo                    String
   b3_ticket               String
@@ -42,8 +42,27 @@ model Asset {
   website                 String
   employees               Int
   ceo                     String
-  created_at              DateTime @default(now())
-  updated_at              DateTime @updatedAt
-  last_time_data_updated  DateTime @default(now())
-  last_time_price_updated DateTime @default(now())
+  AssetData               AssetData[]
+  created_at              DateTime    @default(now())
+  updated_at              DateTime    @updatedAt
+  last_time_data_updated  DateTime    @default(now())
+  last_time_price_updated DateTime    @default(now())
+}
+
+model AssetData {
+  id             Int      @id @default(autoincrement())
+  revenue        Int
+  net_income     Int
+  dividends_paid Int
+  fco            Int
+  fcf            Int
+  ebit           Int
+  cash           Int
+  equity         Int
+  year           Int
+  quarter        Int
+  assetId        Int      @unique
+  asset          Asset    @relation(fields: [assetId], references: [id])
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
 }

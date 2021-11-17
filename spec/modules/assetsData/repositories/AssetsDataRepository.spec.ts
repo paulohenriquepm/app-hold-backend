@@ -1,0 +1,60 @@
+import { AppError } from '@shared/errors/AppError';
+
+import { AssetFactory } from '@factories/assetFactory';
+import { AssetsRepository } from '@modules/assets/repositories/implementations/assetsRepository';
+import { AssetsDataRepository } from '@modules/assetsData/repositories/implementations/assetsDataRepository';
+import { AssetDataFactory } from '@factories/assetDataFactory';
+
+let assetsRepository: AssetsRepository;
+let assetsDataRepository: AssetsDataRepository;
+
+let assetFactory: AssetFactory;
+let assetDataFactory: AssetDataFactory;
+
+describe('AssetsDataRepository', () => {
+  beforeEach(() => {
+    assetsRepository = new AssetsRepository();
+    assetsDataRepository = new AssetsDataRepository();
+
+    assetFactory = new AssetFactory(assetsRepository);
+    assetDataFactory = new AssetDataFactory(assetsDataRepository);
+  });
+
+  describe('create', () => {
+    it('should create a new asset data', async () => {
+      const createdAsset = await assetFactory.create();
+
+      const createdAssetData = await assetDataFactory.create({
+        assetId: createdAsset.id,
+      });
+
+      expect(createdAssetData).toHaveProperty('id');
+    });
+  });
+
+  describe('findByAssetId', () => {
+    describe('when asset exists with given asset id', () => {
+      it('should return the asset', async () => {
+        const createdAsset = await assetFactory.create();
+
+        await assetDataFactory.create({
+          assetId: createdAsset.id,
+        });
+
+        const foundAssetData = await assetsDataRepository.findByAssetId(
+          createdAsset.id,
+        );
+
+        expect(foundAssetData.assetId).toBe(createdAsset.id);
+      });
+    });
+
+    describe('when asset does not exist with given asset id', () => {
+      it('should return null', async () => {
+        await expect(assetsDataRepository.findByAssetId(123)).rejects.toEqual(
+          new AppError('Não existe nenhum dado para o ativo com o id: 123'),
+        );
+      });
+    });
+  });
+});
