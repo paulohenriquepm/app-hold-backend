@@ -39,6 +39,7 @@ model Asset {
   city                    String
   state                   String
   country                 String
+  zip                     String
   website                 String
   employees               Int
   ceo                     String

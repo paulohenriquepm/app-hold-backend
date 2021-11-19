@@ -18,6 +18,7 @@ class AssetFactory {
       city: chance.city(),
       state: chance.state(),
       country: chance.country(),
+      zip: chance.zip(),
       website: chance.url(),
       employees: chance.integer(),
       ceo: chance.name(),

@@ -8,6 +8,7 @@ interface ICreateAssetDTO {
   city: string;
   state: string;
   country: string;
+  zip: string;
   website: string;
   employees: number;
   ceo: string;
