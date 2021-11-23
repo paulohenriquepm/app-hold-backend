@@ -5,12 +5,28 @@ import prisma from '@shared/db/prisma';
 import { AppError } from '@shared/errors/AppError';
 import { IAssetsDataRepository } from '../IAssetsDataRepository';
 import { ICreateAssetDataDTO } from '@modules/assetsData/dtos/ICreateAssetDataDTO';
+import { IUpdateAssetDataDTO } from '@modules/assetsData/dtos/IUpdateAssetDataDTO';
 
 class AssetsDataRepository implements IAssetsDataRepository {
   async create(data: ICreateAssetDataDTO): Promise<AssetData> {
     const assetData = await prisma.assetData.create({
       data,
     });
+
+    return assetData;
+  }
+
+  async update(id: number, data: IUpdateAssetDataDTO): Promise<AssetData> {
+    const assetData = await prisma.assetData
+      .update({
+        where: {
+          id,
+        },
+        data,
+      })
+      .catch(() => {
+        throw new AppError(`Não existe nenhum dado com o id: ${id}`);
+      });
 
     return assetData;
   }

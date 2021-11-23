@@ -32,6 +32,34 @@ describe('AssetsDataRepository', () => {
     });
   });
 
+  describe('update', () => {
+    describe('when assetData exists', () => {
+      it('should create a new asset data', async () => {
+        const createdAsset = await assetFactory.create();
+
+        const assetData = await assetDataFactory.create({
+          assetId: createdAsset.id,
+          ebit: 1000,
+        });
+
+        const updatedAssetData = await assetsDataRepository.update(
+          assetData.id,
+          { ebit: 2000 },
+        );
+
+        expect(updatedAssetData.ebit).toBe(2000);
+      });
+    });
+
+    describe('when assetData does not exists', () => {
+      it('should create a new asset data', async () => {
+        await expect(
+          assetsDataRepository.update(123, { ebit: 2000 }),
+        ).rejects.toEqual(new AppError(`Não existe nenhum dado com o id: 123`));
+      });
+    });
+  });
+
   describe('findByAssetId', () => {
     describe('when asset exists with given asset id', () => {
       it('should return the asset', async () => {
