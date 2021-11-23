@@ -57,4 +57,30 @@ describe('AssetsDataRepository', () => {
       });
     });
   });
+
+  describe('findByAssetId', () => {
+    describe('when asset exists with given asset id, year and quarter', () => {
+      it('should return the asset', async () => {
+        const createdAsset = await assetFactory.create();
+
+        const year = 2021;
+        const quarter = 1;
+
+        await assetDataFactory.create({
+          assetId: createdAsset.id,
+          year,
+          quarter,
+        });
+
+        const foundAssetData =
+          await assetsDataRepository.findByAssetIdYearQuarter(
+            createdAsset.id,
+            year,
+            quarter,
+          );
+
+        expect(foundAssetData.assetId).toBe(createdAsset.id);
+      });
+    });
+  });
 });

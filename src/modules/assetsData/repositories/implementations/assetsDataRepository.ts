@@ -29,6 +29,22 @@ class AssetsDataRepository implements IAssetsDataRepository {
 
     return assetData;
   }
+
+  async findByAssetIdYearQuarter(
+    asset_id: number,
+    year: number,
+    quarter: number,
+  ): Promise<AssetData> {
+    const assetData = await prisma.assetData.findFirst({
+      where: {
+        assetId: asset_id,
+        year,
+        quarter,
+      },
+    });
+
+    return assetData;
+  }
 }
 
 export { AssetsDataRepository };

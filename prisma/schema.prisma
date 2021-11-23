@@ -23,7 +23,7 @@ model User {
 model UsersWallet {
   id         Int      @id @default(autoincrement())
   userId     Int      @unique
-  user       User     @relation(fields: [userId], references: [id])
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }
@@ -63,7 +63,7 @@ model AssetData {
   year           Int
   quarter        Int
   assetId        Int      @unique
-  asset          Asset    @relation(fields: [assetId], references: [id])
+  asset          Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
 }
