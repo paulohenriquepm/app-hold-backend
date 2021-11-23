@@ -4,7 +4,7 @@ import { AppError } from '@shared/errors/AppError';
 
 import { ICreateAssetDTO } from '@modules/assets/dtos/ICreateAssetDTO';
 import { IAssetsRepository } from '@modules/assets/repositories/IAssetsRepository';
-import { ICreateAssetUseCase } from './ICreateAssetUserCase';
+import { ICreateAssetUseCase } from './ICreateAssetUseCase';
 
 class CreateAssetUseCase implements ICreateAssetUseCase {
   constructor(private assetRepository: IAssetsRepository) {}

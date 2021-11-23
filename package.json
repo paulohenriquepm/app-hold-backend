@@ -4,12 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd -r tsconfig-paths/register --inspect --ignore-watch node_modules --transpile-only --respawn src/shared/server.ts",
+    "dev": "tsnd -r tsconfig-paths/register --inspect --ignore-watch node_modules --transpile-only --respawn --exit-child src/shared/server.ts",
     "build": "tsc",
     "test": "jest -i"
   },
   "dependencies": {
     "@prisma/client": "^3.2.0",
+    "axios": "^0.24.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
