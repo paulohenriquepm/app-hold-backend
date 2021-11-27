@@ -3,8 +3,7 @@ import { AppError } from '@shared/errors/AppError';
 import { AssetFactory } from '@factories/assetFactory';
 
 import { AssetsRepository } from '@modules/assets/repositories/implementations/assetsRepository';
-import { CreateAssetUseCase } from '@modules/assets/useCases/createAsset/createAssetUseCase';
-import { CreateAssetDataUseCase } from '@modules/assetsData/useCases/createAssetDataUseCase/createAssetDataUseCase';
+import { CreateAssetDataUseCase } from '@modules/assetsData/useCases/createAssetData/createAssetDataUseCase';
 import { AssetsDataRepository } from '@modules/assetsData/repositories/implementations/assetsDataRepository';
 import { AssetDataFactory } from '@factories/assetDataFactory';
 
@@ -47,7 +46,7 @@ describe('CreateAssetDataUseCase', () => {
   });
 
   describe('when already exists a asset data with given assetId, year and quarter', () => {
-    it('should raise and AppError', async () => {
+    it('should return null', async () => {
       const asset = await assetFactory.create();
 
       const year = 2021;
@@ -65,11 +64,7 @@ describe('CreateAssetDataUseCase', () => {
         quarter,
       });
 
-      await expect(createAssetDataUseCase.execute(assetData)).rejects.toEqual(
-        new AppError(
-          `Já existe dados para o ativo de id: ${asset.id}, para o ano: ${year} e trimestre: ${quarter}`,
-        ),
-      );
+      expect(await createAssetDataUseCase.execute(assetData)).toBeNull;
     });
   });
 });

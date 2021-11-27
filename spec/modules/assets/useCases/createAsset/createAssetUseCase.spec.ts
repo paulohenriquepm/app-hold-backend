@@ -27,8 +27,8 @@ describe('CreateAssetUseCase', () => {
     expect(createdAsset).toHaveProperty('id');
   });
 
-  it('should not create a new asset with duplicated b3_ticket', async () => {
-    await assetFactory.create({
+  it('should return the createdAsset when trying to create a new asset with duplicated b3_ticket', async () => {
+    const createdAssetFactory = await assetFactory.create({
       b3_ticket: 'WEGE3',
     });
 
@@ -36,8 +36,8 @@ describe('CreateAssetUseCase', () => {
       b3_ticket: 'WEGE3',
     });
 
-    await expect(createAssetUseCase.execute(assetdata)).rejects.toEqual(
-      new AppError('Já existe um ativo cadastrado com este ticket da B3 WEGE3'),
-    );
+    const createdAsset = await createAssetUseCase.execute(assetdata);
+
+    expect(createdAsset).toEqual(createdAssetFactory);
   });
 });

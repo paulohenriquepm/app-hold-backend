@@ -21,6 +21,9 @@ class AssetDataFactory {
       equity: chance.integer(),
       year: chance.integer(),
       quarter: chance.integer(),
+      net_margin: chance.integer(),
+      roe: chance.integer(),
+      payout: chance.integer(),
       ...attrs,
     } as AssetData;
   }

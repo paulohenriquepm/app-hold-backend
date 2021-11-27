@@ -1,6 +1,6 @@
-import { ICompanyToImport } from './ICompanyToImport';
+import { IAssetToImport } from './IAssetToImport';
 
-const companiesToImport = [
+const assetsToImport = [
   {
     name: 'Weg',
     b3_ticket: 'WEGE3',
@@ -13,6 +13,6 @@ const companiesToImport = [
     api_ticket: 'ABEV3.SA',
     logo: '',
   },
-] as ICompanyToImport[];
+] as IAssetToImport[];
 
-export { companiesToImport };
+export { assetsToImport };

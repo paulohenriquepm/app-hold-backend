@@ -32,7 +32,7 @@ class AssetsDataRepository implements IAssetsDataRepository {
   }
 
   async findByAssetId(asset_id: number): Promise<AssetData> {
-    const assetData = await prisma.assetData.findUnique({
+    const assetData = await prisma.assetData.findFirst({
       where: {
         assetId: asset_id,
       },
@@ -42,6 +42,20 @@ class AssetsDataRepository implements IAssetsDataRepository {
       throw new AppError(
         `Não existe nenhum dado para o ativo com o id: ${asset_id}`,
       );
+
+    return assetData;
+  }
+
+  async findByAssetIdYear(asset_id: number, year: number): Promise<AssetData> {
+    const assetData = await prisma.assetData.findFirst({
+      where: {
+        assetId: asset_id,
+        year,
+        quarter: {
+          equals: null,
+        },
+      },
+    });
 
     return assetData;
   }

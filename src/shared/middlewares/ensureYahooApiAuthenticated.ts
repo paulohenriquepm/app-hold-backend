@@ -23,7 +23,6 @@ export async function ensureYahooApiAuthenticated(
   try {
     const { sub: user_id } = verify(token, auth.secret_token) as IPayload;
 
-    console.log(user_id);
     if (user_id != '1') throw new AppError('Usuário não possui permissão', 401);
 
     request.user = {

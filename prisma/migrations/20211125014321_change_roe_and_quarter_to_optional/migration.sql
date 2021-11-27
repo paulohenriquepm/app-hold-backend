@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "AssetData" ALTER COLUMN "roe" DROP NOT NULL;
+ALTER TABLE "AssetData" ALTER COLUMN "quarter" DROP NOT NULL;

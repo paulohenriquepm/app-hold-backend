@@ -1,6 +1,6 @@
 import { AppError } from '@shared/errors/AppError';
 
-import { UpdateAssetDataUseCase } from '@modules/assetsData/useCases/updateAssetDataUseCase/updateAssetDataUseCase';
+import { UpdateAssetDataUseCase } from '@modules/assetsData/useCases/updateAssetData/updateAssetDataUseCase';
 import { AssetsDataRepository } from '@modules/assetsData/repositories/implementations/assetsDataRepository';
 import { AssetDataFactory } from '@factories/assetDataFactory';
 import { AssetFactory } from '@factories/assetFactory';
@@ -33,24 +33,24 @@ describe('UpdateAssetDataUseCase', () => {
 
       const assetData = await assetDataFactory.create({
         assetId: createdAsset.id,
-        ebit: 1000,
+        ebit: BigInt(1000),
       });
 
       const updatedAssetData = await updateAssetDataUseCase.execute(
         assetData.id,
         {
-          ebit: 2000,
+          ebit: BigInt(2000),
         },
       );
 
-      expect(updatedAssetData.ebit).toBe(2000);
+      expect(updatedAssetData.ebit).toBe(BigInt(2000));
     });
   });
 
   describe('when assetData does not exists', () => {
     it('should create a new asset data', async () => {
       await expect(
-        updateAssetDataUseCase.execute(123, { ebit: 2000 }),
+        updateAssetDataUseCase.execute(123, { ebit: BigInt(2000) }),
       ).rejects.toEqual(new AppError(`Não existe nenhum dado com o id: 123`));
     });
   });

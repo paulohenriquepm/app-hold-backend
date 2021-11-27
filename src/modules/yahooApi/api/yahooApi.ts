@@ -1,13 +1,13 @@
-import axios, { AxiosInstance } from 'axios';
+import axios from 'axios';
 
-class YahooApi {
-  initialize(): AxiosInstance {
-    const yahooApi = axios.create({
-      baseURL: 'https://query1.finance.yahoo.com/v10/finance/quoteSummary',
-    });
+const yahooApi = axios.create({
+  baseURL: 'https://query1.finance.yahoo.com/v10/finance/quoteSummary',
+});
+// class YahooApi {
+//   initialize(): AxiosInstance {
 
-    return yahooApi;
-  }
-}
+//     return yahooApi;
+//   }
+// }
 
-export { YahooApi };
+export { yahooApi };

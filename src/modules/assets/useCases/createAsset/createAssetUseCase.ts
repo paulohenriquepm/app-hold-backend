@@ -14,10 +14,7 @@ class CreateAssetUseCase implements ICreateAssetUseCase {
       data.b3_ticket,
     );
 
-    if (assetExists)
-      throw new AppError(
-        `Já existe um ativo cadastrado com este ticket da B3 ${data.b3_ticket}`,
-      );
+    if (assetExists) return assetExists;
 
     const asset = await this.assetRepository.create(data);
 

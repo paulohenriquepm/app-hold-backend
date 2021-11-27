@@ -10,17 +10,17 @@ class CreateAssetDataUseCase implements ICreateAssetDataUseCase {
   constructor(private assetDataRepository: IAssetsDataRepository) {}
 
   async execute(data: ICreateAssetDataDTO): Promise<AssetData> {
-    const assetDataExists =
+    const assetDataByYearExists =
+      await this.assetDataRepository.findByAssetIdYear(data.assetId, data.year);
+
+    const assetDataByYearQuarterExists =
       await this.assetDataRepository.findByAssetIdYearQuarter(
         data.assetId,
         data.year,
         data.quarter,
       );
 
-    if (assetDataExists)
-      throw new AppError(
-        `Já existe dados para o ativo de id: ${data.assetId}, para o ano: ${data.year} e trimestre: ${data.quarter}`,
-      );
+    if (assetDataByYearExists || assetDataByYearQuarterExists) return;
 
     const assetData = await this.assetDataRepository.create(data);
 

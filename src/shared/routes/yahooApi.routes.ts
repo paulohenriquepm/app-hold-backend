@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { yahooApiImportController } from '@modules/yahooApi/useCases/importDataUseCase';
+import { yahooApiImportController } from '@modules/yahooApi/useCases/importData';
 
 const yahooApiRouter = Router();
 

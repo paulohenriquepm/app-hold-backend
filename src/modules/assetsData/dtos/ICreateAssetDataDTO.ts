@@ -1,14 +1,17 @@
 interface ICreateAssetDataDTO {
-  revenue: number;
-  net_income: number;
-  dividends_paid: number;
-  fco: number;
-  fcf: number;
-  ebit: number;
-  cash: number;
-  equity: number;
+  revenue: bigint;
+  net_income: bigint;
+  dividends_paid: bigint;
+  fco: bigint;
+  fcf: bigint;
+  ebit: bigint;
+  cash: bigint;
+  equity: bigint;
+  net_margin: number;
+  roe?: number;
+  payout: number;
   year: number;
-  quarter: number;
+  quarter?: number;
   assetId: number;
 }
 
