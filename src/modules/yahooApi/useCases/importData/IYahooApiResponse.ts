@@ -40,24 +40,24 @@ interface IBalanceSheetStatements {
 }
 interface IQuoteSummaryResult {
   assetProfile?: IAssetProfile;
-  // cashflowStatementHistory?: {
-  //   cashflowStatements: ICashflowStatementHistory[];
-  // };
-  // cashflowStatementHistoryQuarterly?: {
-  //   cashflowStatements: ICashflowStatementHistory[];
-  // };
-  // incomeStatementHistory?: {
-  //   incomeStatementHistory: IIncomeStatementHistory[];
-  // };
-  // incomeStatementHistoryQuarterly?: {
-  //   incomeStatementHistory: IIncomeStatementHistory[];
-  // };
-  // balanceSheetHistory?: {
-  //   balanceSheetStatements: IBalanceSheetStatements[];
-  // };
-  // balanceSheetHistoryQuarterly?: {
-  //   balanceSheetStatements: IBalanceSheetStatements[];
-  // };
+  cashflowStatementHistory?: {
+    cashflowStatements: ICashflowStatementHistory[];
+  };
+  cashflowStatementHistoryQuarterly?: {
+    cashflowStatements: ICashflowStatementHistory[];
+  };
+  incomeStatementHistory?: {
+    incomeStatementHistory: IIncomeStatementHistory[];
+  };
+  incomeStatementHistoryQuarterly?: {
+    incomeStatementHistory: IIncomeStatementHistory[];
+  };
+  balanceSheetHistory?: {
+    balanceSheetStatements: IBalanceSheetStatements[];
+  };
+  balanceSheetHistoryQuarterly?: {
+    balanceSheetStatements: IBalanceSheetStatements[];
+  };
 }
 
 interface IYahooApiResponse {
