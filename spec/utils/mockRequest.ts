@@ -4,12 +4,14 @@ type IHeaders = {
 interface IMockRequest<T> {
   body?: Partial<T>;
   headers?: IHeaders;
+  query?: any;
 }
 
-const mockRequest = <T>({ body, headers }: IMockRequest<T>) => {
+const mockRequest = <T>({ body, headers, query }: IMockRequest<T>) => {
   return {
     body,
     headers,
+    query,
   };
 };
 

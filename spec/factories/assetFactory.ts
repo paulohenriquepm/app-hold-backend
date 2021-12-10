@@ -1,5 +1,4 @@
-import { Asset, Prisma } from '.prisma/client';
-import { ICreateAssetDTO } from '@modules/assets/dtos/ICreateAssetDTO';
+import { Asset } from '.prisma/client';
 import { IAssetsRepository } from '@modules/assets/repositories/IAssetsRepository';
 
 import Chance from 'chance';
@@ -8,7 +7,7 @@ const chance = new Chance();
 class AssetFactory {
   constructor(private assetsRepository: IAssetsRepository) {}
 
-  build(attrs: Partial<ICreateAssetDTO> = {}) {
+  build(attrs: Partial<Asset> = {}) {
     return {
       name: chance.name(),
       logo: chance.url(),
@@ -24,15 +23,15 @@ class AssetFactory {
       employees: chance.integer(),
       ceo: chance.name(),
       ...attrs,
-    } as ICreateAssetDTO;
+    } as Asset;
   }
 
-  create(attrs: Partial<ICreateAssetDTO> = {}) {
+  create(attrs: Partial<Asset> = {}) {
     return this.assetsRepository.create(this.build(attrs));
   }
 
-  createMany(attrs: Partial<ICreateAssetDTO> = {}, repeat: number = 1) {
-    let assets: ICreateAssetDTO[] = [];
+  createMany(attrs: Partial<Asset> = {}, repeat: number = 1) {
+    let assets: Asset[] = [];
 
     for (let index = 0; index < repeat; index++) {
       assets.push(this.build(attrs[index]));

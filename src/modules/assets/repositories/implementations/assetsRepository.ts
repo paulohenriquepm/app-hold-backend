@@ -39,10 +39,10 @@ class AssetsRepository implements IAssetsRepository {
     return asset;
   }
 
-  async list(): Promise<Asset[]> {
+  async list(includeAssetData: boolean): Promise<Asset[]> {
     const assets = await prisma.asset.findMany({
       include: {
-        AssetData: true,
+        AssetData: includeAssetData,
       },
     });
 

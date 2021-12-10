@@ -5,8 +5,8 @@ import { IListAssetsUseCase } from './IListAssetsUseCase';
 class ListAssetsUseCase implements IListAssetsUseCase {
   constructor(private readonly assetsRepository: AssetsRepository) {}
 
-  async execute(): Promise<Asset[]> {
-    return this.assetsRepository.list();
+  async execute(includeAssetData: boolean): Promise<Asset[]> {
+    return this.assetsRepository.list(includeAssetData);
   }
 }
 

@@ -8,7 +8,11 @@ class ListAssetsController implements IController {
   constructor(private readonly listAssetsUseCase: IListAssetsUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const assets = await this.listAssetsUseCase.execute();
+    const { includeAssetData = 'true' } = request.query as any;
+
+    const assets = await this.listAssetsUseCase.execute(
+      includeAssetData === 'true' ? true : false,
+    );
 
     return response.json(assets);
   }

@@ -28,7 +28,7 @@ describe('ListAssetsUseCase', () => {
     });
 
     it('should return a list of assets', async () => {
-      const assets = await listAssetsUseCase.execute();
+      const assets = await listAssetsUseCase.execute(true);
 
       expect(assets.length).toBe(countAssets);
     });
@@ -36,7 +36,7 @@ describe('ListAssetsUseCase', () => {
 
   describe('when assets does not exists', () => {
     it('should return a list of assets', async () => {
-      const assets = await listAssetsUseCase.execute();
+      const assets = await listAssetsUseCase.execute(true);
 
       expect(assets.length).toBe(0);
     });

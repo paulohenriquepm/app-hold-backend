@@ -1,7 +1,7 @@
 import { Asset } from '@prisma/client';
 
 interface IListAssetsUseCase {
-  execute(): Promise<Asset[]>;
+  execute(includeAssetData: boolean): Promise<Asset[]>;
 }
 
 export { IListAssetsUseCase };
