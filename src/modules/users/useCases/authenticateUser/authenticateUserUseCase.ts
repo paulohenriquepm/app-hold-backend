@@ -34,6 +34,8 @@ class AuthenticateUserUseCase implements IAuthenticateUserUseCase {
       expiresIn: expires_in_token,
     });
 
+    delete user.password;
+
     return {
       user,
       token,

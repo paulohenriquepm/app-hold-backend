@@ -10,14 +10,14 @@ class UpdateUserController implements IUpdateUserController {
     const { id } = request.params;
     const { name, email, old_password, new_password } = request.body;
 
-    await this.updateUserUseCase.execute(Number(id), {
+    const user = await this.updateUserUseCase.execute(Number(id), {
       name,
       email,
       old_password,
       new_password,
     });
 
-    return response.status(201).send();
+    return response.status(201).send(user);
   }
 }
 

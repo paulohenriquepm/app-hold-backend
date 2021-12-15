@@ -29,7 +29,7 @@ class UpdateUserUseCase implements IUpdateUserUseCase {
       const checkOldPassword = await compare(data.old_password, user.password);
 
       if (!checkOldPassword)
-        throw new AppError('A senha antiga informada está incorreta.');
+        throw new AppError('A senha atual informada está incorreta.');
     }
 
     if (data.new_password) {
@@ -39,7 +39,9 @@ class UpdateUserUseCase implements IUpdateUserUseCase {
     delete data.new_password;
     delete data.old_password;
 
-    const updatedUser = this.usersRepository.update(user_id, data);
+    const updatedUser = await this.usersRepository.update(user_id, data);
+
+    delete updatedUser.password;
 
     return updatedUser;
   }

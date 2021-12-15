@@ -74,7 +74,7 @@ describe('updateUserUseCase', () => {
           new_password: 'new-password',
         }),
       ).rejects.toEqual(
-        new AppError(`A senha antiga informada está incorreta.`),
+        new AppError(`A senha atual informada está incorreta.`),
       );
     });
   });
