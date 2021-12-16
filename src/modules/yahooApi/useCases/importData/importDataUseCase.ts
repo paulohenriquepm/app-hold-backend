@@ -19,7 +19,7 @@ class ImportDataUseCase implements IImportDataUseCase {
   async execute() {
     this.assetsToImport.forEach(async assetToImport => {
       const apiResponse = await this.yahooApi.get(
-        `/${assetToImport.api_ticket}?modules=assetProfile%2CincomeStatementHistory%2CcashflowStatementHistory%2CcashflowStatementHistoryQuarterly%2CincomeStatementHistory%2CincomeStatementHistoryQuarterly%2CbalanceSheetHistory%2CbalanceSheetHistoryQuarterly`,
+        `/${assetToImport.api_ticket}?modules=assetProfile%2CincomeStatementHistory%2CcashflowStatementHistory%2CcashflowStatementHistoryQuarterly%2CincomeStatementHistory%2CincomeStatementHistoryQuarterly%2CbalanceSheetHistory%2CbalanceSheetHistoryQuarterly%2CdefaultKeyStatistics`,
       );
 
       const mappedAssetToImport = mapAssetToImport(

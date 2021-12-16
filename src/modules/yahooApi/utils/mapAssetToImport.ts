@@ -30,6 +30,10 @@ const mapAssetToImport = (
       apiResponseData.quoteSummary.result[0].assetProfile.fullTimeEmployees,
     ceo: apiResponseData.quoteSummary.result[0].assetProfile.companyOfficers[0]
       .name,
+    total_stocks: BigInt(
+      apiResponseData.quoteSummary.result[0].defaultKeyStatistics
+        .sharesOutstanding.raw,
+    ),
   } as ICreateAssetDTO;
 
   return assetData;

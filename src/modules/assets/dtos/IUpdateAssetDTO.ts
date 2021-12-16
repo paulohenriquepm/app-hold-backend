@@ -12,6 +12,7 @@ interface IUpdateAssetDTO {
   website?: string;
   employees?: number;
   ceo?: string;
+  total_stocks?: bigint;
 }
 
 export { IUpdateAssetDTO };

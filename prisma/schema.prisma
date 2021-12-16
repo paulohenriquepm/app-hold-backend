@@ -43,6 +43,7 @@ model Asset {
   website                 String
   employees               Int
   ceo                     String
+  total_stocks            BigInt
   AssetData               AssetData[]
   created_at              DateTime    @default(now())
   updated_at              DateTime    @updatedAt

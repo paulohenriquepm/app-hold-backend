@@ -38,6 +38,10 @@ interface IBalanceSheetStatements {
   minorityInterest: IRawAndFormattedApiValues;
   totalStockholderEquity: IRawAndFormattedApiValues;
 }
+
+interface IDefaultKeyStatistics {
+  sharesOutstanding: IRawAndFormattedApiValues;
+}
 interface IQuoteSummaryResult {
   assetProfile?: IAssetProfile;
   cashflowStatementHistory?: {
@@ -58,6 +62,7 @@ interface IQuoteSummaryResult {
   balanceSheetHistoryQuarterly?: {
     balanceSheetStatements: IBalanceSheetStatements[];
   };
+  defaultKeyStatistics?: IDefaultKeyStatistics;
 }
 
 interface IYahooApiResponse {
