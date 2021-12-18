@@ -23,6 +23,7 @@ class AssetFactory {
       employees: chance.integer(),
       ceo: chance.name(),
       total_stocks: chance.integer(),
+      last_12_months_dividends: chance.integer(),
       ...attrs,
     } as Asset;
   }

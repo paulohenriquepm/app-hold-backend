@@ -29,26 +29,27 @@ model UsersWallet {
 }
 
 model Asset {
-  id                      Int         @id @default(autoincrement())
-  name                    String
-  logo                    String
-  b3_ticket               String
-  api_ticket              String
-  sector                  String
-  address                 String
-  city                    String
-  state                   String
-  country                 String
-  zip                     String
-  website                 String
-  employees               Int
-  ceo                     String
-  total_stocks            BigInt
-  AssetData               AssetData[]
-  created_at              DateTime    @default(now())
-  updated_at              DateTime    @updatedAt
-  last_time_data_updated  DateTime    @default(now())
-  last_time_price_updated DateTime    @default(now())
+  id                       Int         @id @default(autoincrement())
+  name                     String
+  logo                     String
+  b3_ticket                String
+  api_ticket               String
+  sector                   String
+  address                  String
+  city                     String
+  state                    String
+  country                  String
+  zip                      String
+  website                  String
+  employees                Int
+  ceo                      String
+  total_stocks             BigInt
+  last_12_months_dividends BigInt
+  AssetData                AssetData[]
+  created_at               DateTime    @default(now())
+  updated_at               DateTime    @updatedAt
+  last_time_data_updated   DateTime    @default(now())
+  last_time_price_updated  DateTime    @default(now())
 }
 
 model AssetData {

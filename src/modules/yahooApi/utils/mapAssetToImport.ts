@@ -34,6 +34,10 @@ const mapAssetToImport = (
       apiResponseData.quoteSummary.result[0].defaultKeyStatistics
         .sharesOutstanding.raw,
     ),
+    last_12_months_dividends: BigInt(
+      apiResponseData.quoteSummary.result[0].cashflowStatementHistory
+        .cashflowStatements[0].dividendsPaid.raw * -1,
+    ),
   } as ICreateAssetDTO;
 
   return assetData;
