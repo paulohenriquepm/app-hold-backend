@@ -28,15 +28,31 @@ describe('ListAssetsUseCase', () => {
     });
 
     it('should return a list of assets', async () => {
-      const assets = await listAssetsUseCase.execute(true);
+      const assets = await listAssetsUseCase.execute(true, '');
 
       expect(assets.length).toBe(countAssets);
+    });
+
+    it('should return the asset with given name', async () => {
+      await assetFactory.create({ name: 'Weg' });
+
+      const asset = await listAssetsUseCase.execute(true, 'Weg');
+
+      expect(asset[0].name).toBe('Weg');
+    });
+
+    it('should return the asset with given ticket', async () => {
+      await assetFactory.create({ b3_ticket: 'WEGE3' });
+
+      const asset = await listAssetsUseCase.execute(true, 'WEGE3');
+
+      expect(asset[0].b3_ticket).toBe('WEGE3');
     });
   });
 
   describe('when assets does not exists', () => {
     it('should return a list of assets', async () => {
-      const assets = await listAssetsUseCase.execute(true);
+      const assets = await listAssetsUseCase.execute(true, '');
 
       expect(assets.length).toBe(0);
     });

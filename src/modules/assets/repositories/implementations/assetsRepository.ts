@@ -39,8 +39,24 @@ class AssetsRepository implements IAssetsRepository {
     return asset;
   }
 
-  async list(includeAssetData: boolean): Promise<Asset[]> {
+  async list(includeAssetData: boolean, searchAsset: string): Promise<Asset[]> {
     const assets = await prisma.asset.findMany({
+      where: {
+        OR: [
+          {
+            b3_ticket: {
+              contains: searchAsset,
+              mode: 'insensitive',
+            },
+          },
+          {
+            name: {
+              contains: searchAsset,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      },
       include: {
         AssetData: includeAssetData,
       },

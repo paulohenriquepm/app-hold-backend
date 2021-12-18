@@ -22,6 +22,7 @@ class AssetFactory {
       website: chance.url(),
       employees: chance.integer(),
       ceo: chance.name(),
+      total_stocks: chance.integer(),
       ...attrs,
     } as Asset;
   }
