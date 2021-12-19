@@ -38,6 +38,7 @@ const mapAssetToImport = (
       apiResponseData.quoteSummary.result[0].cashflowStatementHistory
         .cashflowStatements[0].dividendsPaid.raw * -1,
     ),
+    price: apiResponseData.quoteSummary.result[0].price.regularMarketPrice.raw,
   } as ICreateAssetDTO;
 
   return assetData;

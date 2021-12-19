@@ -24,6 +24,7 @@ class AssetFactory {
       ceo: chance.name(),
       total_stocks: chance.integer(),
       last_12_months_dividends: chance.integer(),
+      price: chance.integer(),
       ...attrs,
     } as Asset;
   }

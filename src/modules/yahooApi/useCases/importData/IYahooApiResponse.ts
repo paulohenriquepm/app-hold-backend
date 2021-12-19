@@ -42,6 +42,10 @@ interface IBalanceSheetStatements {
 interface IDefaultKeyStatistics {
   sharesOutstanding: IRawAndFormattedApiValues;
 }
+
+interface IPrice {
+  regularMarketPrice: IRawAndFormattedApiValues;
+}
 interface IQuoteSummaryResult {
   assetProfile?: IAssetProfile;
   cashflowStatementHistory?: {
@@ -63,6 +67,7 @@ interface IQuoteSummaryResult {
     balanceSheetStatements: IBalanceSheetStatements[];
   };
   defaultKeyStatistics?: IDefaultKeyStatistics;
+  price: IPrice;
 }
 
 interface IYahooApiResponse {

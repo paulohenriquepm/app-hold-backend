@@ -14,6 +14,7 @@ interface ICreateAssetDTO {
   ceo: string;
   total_stocks: bigint;
   last_12_months_dividends: bigint;
+  price: number;
 }
 
 export { ICreateAssetDTO };
