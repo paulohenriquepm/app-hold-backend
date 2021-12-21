@@ -1,4 +1,4 @@
-import { Prisma, UsersWallet } from '.prisma/client';
+import { UsersWallet } from '.prisma/client';
 
 import { IUsersWalletRepository } from '@modules/usersWallet/repositories/IUsersWalletRepository';
 
