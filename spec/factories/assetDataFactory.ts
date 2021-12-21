@@ -1,8 +1,7 @@
 import { AssetData } from '.prisma/client';
+import Chance from 'chance';
 
 import { IAssetsDataRepository } from '@modules/assetsData/repositories/IAssetsDataRepository';
-
-import Chance from 'chance';
 
 const chance = new Chance();
 

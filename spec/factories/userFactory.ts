@@ -1,8 +1,7 @@
 import { User } from '.prisma/client';
+import Chance from 'chance';
 
 import { IUsersRepository } from '@modules/users/repositories/IUsersRepository';
-
-import Chance from 'chance';
 
 const chance = new Chance();
 

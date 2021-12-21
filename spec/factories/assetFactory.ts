@@ -1,7 +1,7 @@
 import { Asset } from '.prisma/client';
-import { IAssetsRepository } from '@modules/assets/repositories/IAssetsRepository';
-
 import Chance from 'chance';
+
+import { IAssetsRepository } from '@modules/assets/repositories/IAssetsRepository';
 
 const chance = new Chance();
 class AssetFactory {
