@@ -21,15 +21,16 @@ model User {
 }
 
 model UsersWallet {
-  id         Int      @id @default(autoincrement())
-  userId     Int      @unique
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
+  id                Int                 @id @default(autoincrement())
+  userId            Int                 @unique
+  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  created_at        DateTime            @default(now())
+  updated_at        DateTime            @updatedAt
+  UsersWalletAssets UsersWalletAssets[]
 }
 
 model Asset {
-  id                       Int         @id @default(autoincrement())
+  id                       Int                 @id @default(autoincrement())
   name                     String
   logo                     String
   b3_ticket                String
@@ -47,10 +48,11 @@ model Asset {
   last_12_months_dividends BigInt
   price                    Float
   AssetData                AssetData[]
-  created_at               DateTime    @default(now())
-  updated_at               DateTime    @updatedAt
-  last_time_data_updated   DateTime    @default(now())
-  last_time_price_updated  DateTime    @default(now())
+  created_at               DateTime            @default(now())
+  updated_at               DateTime            @updatedAt
+  last_time_data_updated   DateTime            @default(now())
+  last_time_price_updated  DateTime            @default(now())
+  UsersWalletAssets        UsersWalletAssets[]
 }
 
 model AssetData {
@@ -72,4 +74,15 @@ model AssetData {
   asset          Asset    @relation(fields: [assetId], references: [id], onDelete: Cascade)
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
+}
+
+model UsersWalletAssets {
+  id           Int         @id @default(autoincrement())
+  quantity     Int
+  assetId      Int
+  asset        Asset       @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  userWalletId Int
+  userWallet   UsersWallet @relation(fields: [userWalletId], references: [id], onDelete: Cascade)
+  created_at   DateTime    @default(now())
+  updated_at   DateTime    @updatedAt
 }
