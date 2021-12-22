@@ -102,22 +102,12 @@ describe('AssetsRepository', () => {
   });
 
   describe('findById', () => {
-    describe('when asset exists with given id', () => {
-      it('should return the asset', async () => {
-        const createdAsset = await assetFactory.create();
+    it('should return the asset', async () => {
+      const createdAsset = await assetFactory.create();
 
-        const foundAsset = await assetsRepository.findById(createdAsset.id);
+      const foundAsset = await assetsRepository.findById(createdAsset.id);
 
-        expect(foundAsset.id).toBe(createdAsset.id);
-      });
-    });
-
-    describe('when asset does not exist with given b3_ticket', () => {
-      it('should return null', async () => {
-        await expect(assetsRepository.findById(123)).rejects.toEqual(
-          new AppError('Não existe nenhum ativo com o id: 123'),
-        );
-      });
+      expect(foundAsset.id).toBe(createdAsset.id);
     });
   });
 });

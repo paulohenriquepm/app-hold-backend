@@ -85,10 +85,10 @@ class AssetsRepository implements IAssetsRepository {
       where: {
         id: asset_id,
       },
+      include: {
+        AssetData: true,
+      },
     });
-
-    if (!asset)
-      throw new AppError(`Não existe nenhum ativo com o id: ${asset_id}`);
 
     return asset;
   }

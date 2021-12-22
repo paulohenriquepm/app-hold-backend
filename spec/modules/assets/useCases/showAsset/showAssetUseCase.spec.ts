@@ -29,7 +29,7 @@ describe('ShowAssetUseCase', () => {
     });
   });
 
-  describe('when asset does not exist with given b3_ticket', () => {
+  describe('when asset does not exist with given id', () => {
     it('should return null', async () => {
       await expect(showAssetUseCase.execute(123)).rejects.toEqual(
         new AppError('Não existe nenhum ativo com o id: 123'),
