@@ -39,7 +39,7 @@ class AssetsRepository implements IAssetsRepository {
     return asset;
   }
 
-  async list(includeAssetData: boolean, searchAsset: string): Promise<Asset[]> {
+  async list(searchAsset: string): Promise<Asset[]> {
     if (searchAsset) {
       const assets = await prisma.asset.findMany({
         where: {
@@ -58,19 +58,12 @@ class AssetsRepository implements IAssetsRepository {
             },
           ],
         },
-        include: {
-          AssetData: includeAssetData,
-        },
       });
 
       return assets;
     }
 
-    const assets = await prisma.asset.findMany({
-      include: {
-        AssetData: includeAssetData,
-      },
-    });
+    const assets = await prisma.asset.findMany();
 
     return assets;
   }

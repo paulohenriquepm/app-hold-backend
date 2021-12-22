@@ -35,7 +35,7 @@ class FakeAssetsRepository implements IAssetsRepository {
     return { count: data.length };
   }
 
-  async list(includeAssetData: boolean, searchAsset: string): Promise<Asset[]> {
+  async list(searchAsset: string): Promise<Asset[]> {
     return this.assets;
   }
 

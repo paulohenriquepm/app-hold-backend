@@ -29,7 +29,7 @@ describe('AssetsRepository', () => {
     });
 
     it('should return a list of assets', async () => {
-      const assets = await assetsRepository.list(true, '');
+      const assets = await assetsRepository.list('');
 
       expect(assets.length).toBe(countAssets);
     });
@@ -41,7 +41,7 @@ describe('AssetsRepository', () => {
 
       await assetFactory.createMany({}, countAssets);
 
-      const assets = await assetsRepository.list(true, '');
+      const assets = await assetsRepository.list('');
 
       expect(assets.length).toBe(countAssets);
     });
