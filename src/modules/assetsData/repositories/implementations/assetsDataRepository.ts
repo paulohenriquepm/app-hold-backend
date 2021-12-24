@@ -51,9 +51,7 @@ class AssetsDataRepository implements IAssetsDataRepository {
       where: {
         assetId: asset_id,
         year,
-        quarter: {
-          equals: null,
-        },
+        quarter: null,
       },
     });
 

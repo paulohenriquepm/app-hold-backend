@@ -26,45 +26,20 @@ describe('CreateAssetDataUseCase', () => {
     createAssetDataUseCase = new CreateAssetDataUseCase(assetsDataRepository);
   });
 
-  describe('when asset data does not exists with given assetId, year and quarter', () => {
-    it('should create a new asset data', async () => {
-      const asset = await assetFactory.create();
+  it('should create a new asset data', async () => {
+    const asset = await assetFactory.create();
 
-      const year = 2021;
-      const quarter = 1;
+    const year = 2021;
+    const quarter = 1;
 
-      const assetData = assetDataFactory.build({
-        assetId: asset.id,
-        year,
-        quarter,
-      });
-
-      const createdAssetData = await createAssetDataUseCase.execute(assetData);
-
-      expect(createdAssetData).toHaveProperty('id');
+    const assetData = assetDataFactory.build({
+      assetId: asset.id,
+      year,
+      quarter,
     });
-  });
 
-  describe('when already exists a asset data with given assetId, year and quarter', () => {
-    it('should return null', async () => {
-      const asset = await assetFactory.create();
+    const createdAssetData = await createAssetDataUseCase.execute(assetData);
 
-      const year = 2021;
-      const quarter = 1;
-
-      await assetDataFactory.create({
-        assetId: asset.id,
-        year,
-        quarter,
-      });
-
-      const assetData = assetDataFactory.build({
-        assetId: asset.id,
-        year,
-        quarter,
-      });
-
-      expect(await createAssetDataUseCase.execute(assetData)).toBeNull;
-    });
+    expect(createdAssetData).toHaveProperty('id');
   });
 });
