@@ -14,6 +14,9 @@ class UsersRepository implements IUsersRepository {
       where: {
         id,
       },
+      include: {
+        wallet: true,
+      },
     });
 
     return user;
@@ -25,6 +28,9 @@ class UsersRepository implements IUsersRepository {
         email: {
           equals: email,
         },
+      },
+      include: {
+        wallet: true,
       },
     });
 
