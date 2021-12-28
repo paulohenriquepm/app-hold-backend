@@ -1,12 +1,10 @@
 import { UsersWalletAssets } from '.prisma/client';
 
-import { ICreateUsersWalletAssetsUseCase } from './ICreateUsersWalletAssetsUseCase';
+import { ICreateUserWalletAssetUseCase } from './ICreateUserWalletAssetUseCase';
 import { IUsersWalletAssetsRepository } from '@modules/usersWalletAssets/repositories/IUsersWalletAssetsRepository';
 import { ICreateUsersWalletAssetsDTO } from '@modules/usersWalletAssets/dtos/ICreateUsersWalletAssetsDTO';
 
-class CreateUsersWalletAssetsUseCase
-  implements ICreateUsersWalletAssetsUseCase
-{
+class CreateUserWalletAssetUseCase implements ICreateUserWalletAssetUseCase {
   constructor(
     private usersWalletAssetsRepository: IUsersWalletAssetsRepository,
   ) {}
@@ -20,4 +18,4 @@ class CreateUsersWalletAssetsUseCase
   }
 }
 
-export { CreateUsersWalletAssetsUseCase };
+export { CreateUserWalletAssetUseCase };

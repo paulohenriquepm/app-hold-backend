@@ -3,21 +3,21 @@ import { Request, Response } from 'express';
 import { mockResponse } from '@utils/mockResponse';
 import { mockRequest } from '@utils/mockRequest';
 
-import { CreateUsersWalletAssetsController } from '@modules/usersWalletAssets/useCases/createUsersWalletAssets/createUsersWalletAssetsController';
-import { CreateUsersWalletAssetsUseCase } from '@modules/usersWalletAssets/useCases/createUsersWalletAssets/createUsersWalletAssetsUseCase';
+import { CreateUserWalletAssetController } from '@modules/usersWalletAssets/useCases/createUserWalletAsset/createUserWalletAssetController';
+import { CreateUserWalletAssetUseCase } from '@modules/usersWalletAssets/useCases/createUserWalletAsset/createUserWalletAssetUseCase';
 import { UsersWalletAssetsFactory } from '@factories/usersWalletAssetsFactory';
 import { UsersWalletAssetsRepository } from '@modules/usersWalletAssets/repositories/implementations/usersWalletAssetsRepository';
 
 jest.mock(
-  '@modules/usersWalletAssets/useCases/createUsersWalletAssets/createUsersWalletAssetsUseCase',
+  '@modules/usersWalletAssets/useCases/createUserWalletAsset/createUserWalletAssetUseCase',
 );
 
 const CreateUsersWalletAssetsUseCaseMock =
-  CreateUsersWalletAssetsUseCase as jest.Mock<CreateUsersWalletAssetsUseCase>;
-const createUsersWalletAssetsUseCaseMock =
-  new CreateUsersWalletAssetsUseCaseMock() as jest.Mocked<CreateUsersWalletAssetsUseCase>;
-const createUsersWalletAssetsController = new CreateUsersWalletAssetsController(
-  createUsersWalletAssetsUseCaseMock,
+  CreateUserWalletAssetUseCase as jest.Mock<CreateUserWalletAssetUseCase>;
+const createUserWalletAssetUseCaseMock =
+  new CreateUsersWalletAssetsUseCaseMock() as jest.Mocked<CreateUserWalletAssetUseCase>;
+const createUserWalletAssetController = new CreateUserWalletAssetController(
+  createUserWalletAssetUseCaseMock,
 );
 
 const request = mockRequest({ query: { includeAssetData: 'true' } });
@@ -28,20 +28,20 @@ const usersWalletAssetsFactory = new UsersWalletAssetsFactory(
   usersWalletAssetsRepository,
 );
 
-describe('CreateUsersWalletAssetsController', () => {
+describe('CreateUserWalletAssetController', () => {
   it('should return the expected result', async () => {
     const expectedResult = usersWalletAssetsFactory.build();
 
-    createUsersWalletAssetsUseCaseMock.execute.mockReturnValueOnce(
+    createUserWalletAssetUseCaseMock.execute.mockReturnValueOnce(
       Promise.resolve(expectedResult),
     );
 
-    await createUsersWalletAssetsController.handle(
+    await createUserWalletAssetController.handle(
       request as Request,
       response as Response,
     );
 
     expect(response.json).toHaveBeenCalledWith(expectedResult);
-    expect(createUsersWalletAssetsUseCaseMock.execute).toHaveBeenCalledTimes(1);
+    expect(createUserWalletAssetUseCaseMock.execute).toHaveBeenCalledTimes(1);
   });
 });

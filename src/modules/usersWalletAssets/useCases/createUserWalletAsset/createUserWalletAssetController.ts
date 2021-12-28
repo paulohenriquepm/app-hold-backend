@@ -2,11 +2,11 @@ import { Request, Response } from 'express';
 
 import { IController } from '@shared/interfaces/IController';
 
-import { ICreateUsersWalletAssetsUseCase } from './ICreateUsersWalletAssetsUseCase';
+import { ICreateUserWalletAssetUseCase } from './ICreateUserWalletAssetUseCase';
 
-class CreateUsersWalletAssetsController implements IController {
+class CreateUserWalletAssetController implements IController {
   constructor(
-    private readonly createUsersWalletAssetsUseCase: ICreateUsersWalletAssetsUseCase,
+    private readonly createUsersWalletAssetsUseCase: ICreateUserWalletAssetUseCase,
   ) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
@@ -18,4 +18,4 @@ class CreateUsersWalletAssetsController implements IController {
   }
 }
 
-export { CreateUsersWalletAssetsController };
+export { CreateUserWalletAssetController };

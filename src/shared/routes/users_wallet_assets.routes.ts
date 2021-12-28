@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-import { createUsersWalletAssetsController } from '@modules/usersWalletAssets/useCases/createUsersWalletAssets';
+import { createUserWalletAssetController } from '@modules/usersWalletAssets/useCases/createUserWalletAsset';
 
 const usersWalletAssetsRouter = Router();
 
 usersWalletAssetsRouter.post('/', (request, response) => {
-  return createUsersWalletAssetsController.handle(request, response);
+  return createUserWalletAssetController.handle(request, response);
 });
 
 export { usersWalletAssetsRouter };
