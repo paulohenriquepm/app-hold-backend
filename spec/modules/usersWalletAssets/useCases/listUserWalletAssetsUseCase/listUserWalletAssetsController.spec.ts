@@ -28,7 +28,6 @@ describe('ListUserWalletAssetsController', () => {
       response as Response,
     );
 
-    expect(response.status).toHaveBeenCalledWith(201);
     expect(listUserWalletAssetsUseCaseMock.execute).toHaveBeenCalledTimes(1);
   });
 });

@@ -13,6 +13,13 @@ class UsersWalletAssetsRepository implements IUsersWalletAssetsRepository {
       where: {
         userWalletId: user_wallet_id,
       },
+      include: {
+        asset: {
+          select: {
+            price: true,
+          },
+        },
+      },
     });
 
     return userWalletAssets;
