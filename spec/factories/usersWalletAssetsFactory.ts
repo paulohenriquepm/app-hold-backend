@@ -20,6 +20,16 @@ class UsersWalletAssetsFactory {
   create(attrs: Partial<UsersWalletAssets> = {}) {
     return this.usersWalletAssetsRepository.create(this.build(attrs));
   }
+
+  createMany(attrs: Partial<UsersWalletAssets> = {}, repeat: number = 1) {
+    let assets: UsersWalletAssets[] = [];
+
+    for (let index = 0; index < repeat; index++) {
+      assets.push(this.build(attrs));
+    }
+
+    return this.usersWalletAssetsRepository.createMany(assets);
+  }
 }
 
 export { UsersWalletAssetsFactory };

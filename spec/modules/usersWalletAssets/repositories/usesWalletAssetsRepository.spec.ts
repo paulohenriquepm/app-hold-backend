@@ -35,6 +35,35 @@ describe('UsersWalletAssetsRepository', () => {
     usersWalletFactory = new UsersWalletFactory(usersWalletRepository);
   });
 
+  describe('listByUserWalletId', () => {
+    it('should return the list of assets when exists', async () => {
+      const createdAsset = await assetFactory.create();
+      const createdUser = await userFactory.create();
+      const createdUserWallet = await usersWalletFactory.create(createdUser.id);
+      await usersWalletAssetsFactory.createMany(
+        {
+          userWalletId: createdUserWallet.id,
+          assetId: createdAsset.id,
+        },
+        2,
+      );
+
+      const userWalletAssets =
+        await usersWalletAssetsRepository.listByUserWalletId(
+          createdUserWallet.id,
+        );
+
+      expect(userWalletAssets.length).toEqual(2);
+    });
+
+    it('should return empty when assets does not exists', async () => {
+      const userWalletAssets =
+        await usersWalletAssetsRepository.listByUserWalletId(123);
+
+      expect(userWalletAssets.length).toEqual(0);
+    });
+  });
+
   describe('findById', () => {
     it('should return the asset when exists', async () => {
       const createdAsset = await assetFactory.create();

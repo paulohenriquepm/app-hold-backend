@@ -5,8 +5,6 @@ import { mockRequest } from '@utils/mockRequest';
 
 import { DeleteUserWalletAssetController } from '@modules/usersWalletAssets/useCases/deleteUserWalletAsset/deleteUserWalletAssetController';
 import { DeleteUserWalletAssetUseCase } from '@modules/usersWalletAssets/useCases/deleteUserWalletAsset/deleteUserWalletAssetUseCase';
-import { UsersWalletAssetsFactory } from '@factories/usersWalletAssetsFactory';
-import { UsersWalletAssetsRepository } from '@modules/usersWalletAssets/repositories/implementations/usersWalletAssetsRepository';
 
 jest.mock(
   '@modules/usersWalletAssets/useCases/deleteUserWalletAsset/deleteUserWalletAssetUseCase',
@@ -18,11 +16,6 @@ const deleteUserWalletAssetUseCaseMock =
   new DeleteUserWalletAssetUseCaseMock() as jest.Mocked<DeleteUserWalletAssetUseCase>;
 const deleteUserWalletAssetController = new DeleteUserWalletAssetController(
   deleteUserWalletAssetUseCaseMock,
-);
-
-const usersWalletAssetsRepository = new UsersWalletAssetsRepository();
-const usersWalletAssetsFactory = new UsersWalletAssetsFactory(
-  usersWalletAssetsRepository,
 );
 
 describe('DeleteUserWalletAssetController', () => {
