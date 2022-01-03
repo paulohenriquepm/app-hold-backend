@@ -17,6 +17,8 @@ class UsersWalletAssetsRepository implements IUsersWalletAssetsRepository {
         asset: {
           select: {
             price: true,
+            name: true,
+            b3_ticket: true,
           },
         },
       },
