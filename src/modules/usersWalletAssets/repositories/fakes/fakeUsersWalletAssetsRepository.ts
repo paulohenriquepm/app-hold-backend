@@ -1,6 +1,7 @@
 import { Prisma, UsersWalletAssets } from '@prisma/client';
 
 import { ICreateUsersWalletAssetsDTO } from '@modules/usersWalletAssets/dtos/ICreateUsersWalletAssetsDTO';
+import { IUpdateUsersWalletAssetDTO } from '@modules/usersWalletAssets/dtos/IUpdateUsersWalletAssetDTO';
 
 import { IUsersWalletAssetsRepository } from '../IUsersWalletAssetsRepository';
 
@@ -49,6 +50,19 @@ class FakeUsersWalletAssetsRepository implements IUsersWalletAssetsRepository {
     });
 
     return { count: data.length };
+  }
+
+  async update(
+    user_wallet_asset_id: number,
+    data: IUpdateUsersWalletAssetDTO,
+  ): Promise<UsersWalletAssets> {
+    const userWalletAssetIndex = this.usersWalletAssets.findIndex(
+      userWalletAsset => userWalletAsset.id === user_wallet_asset_id,
+    );
+
+    this.usersWalletAssets[userWalletAssetIndex].quantity = data.quantity;
+
+    return this.usersWalletAssets[userWalletAssetIndex];
   }
 
   async destroy(user_wallet_asset_id: number): Promise<void> {

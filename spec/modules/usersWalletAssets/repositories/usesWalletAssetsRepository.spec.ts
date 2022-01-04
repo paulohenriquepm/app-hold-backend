@@ -106,6 +106,45 @@ describe('UsersWalletAssetsRepository', () => {
     });
   });
 
+  describe('update', () => {
+    describe('when assets exists with given id', () => {
+      it('should update the asset', async () => {
+        const createdAsset = await assetFactory.create();
+        const createdUser = await userFactory.create();
+        const createdUserWallet = await usersWalletFactory.create(
+          createdUser.id,
+        );
+        const createdUserWalletAsset = await usersWalletAssetsFactory.create({
+          assetId: createdAsset.id,
+          userWalletId: createdUserWallet.id,
+          quantity: 1,
+        });
+
+        const updatedUserWalletAsset = await usersWalletAssetsRepository.update(
+          createdUserWalletAsset.id,
+          {
+            quantity: 2,
+          },
+        );
+
+        expect(updatedUserWalletAsset.id).toEqual(createdUserWalletAsset.id);
+        expect(updatedUserWalletAsset.quantity).toEqual(2);
+      });
+    });
+
+    describe('when assets does not exist with given id', () => {
+      it('should raise an AppError', async () => {
+        await expect(
+          usersWalletAssetsRepository.update(123, {
+            quantity: 2,
+          }),
+        ).rejects.toEqual(
+          new AppError('Não existe nenhum ativo com o id: 123'),
+        );
+      });
+    });
+  });
+
   describe('destroy', () => {
     it('should destroy the asset', async () => {
       const createdAsset = await assetFactory.create();

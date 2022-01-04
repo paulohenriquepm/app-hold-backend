@@ -28,7 +28,7 @@ describe('DeleteUserWalletAssetController', () => {
       response as Response,
     );
 
-    expect(response.status).toHaveBeenCalledWith(201);
+    expect(response.sendStatus).toHaveBeenCalledWith(200);
     expect(deleteUserWalletAssetUseCaseMock.execute).toHaveBeenCalledTimes(1);
   });
 });

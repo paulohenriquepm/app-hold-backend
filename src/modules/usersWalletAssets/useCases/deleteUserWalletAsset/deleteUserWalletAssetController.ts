@@ -14,7 +14,7 @@ class DeleteUserWalletAssetController implements IController {
 
     await this.deleteUsersWalletAssetsUseCase.execute(Number(id));
 
-    return response.status(201);
+    return response.sendStatus(200);
   }
 }
 
