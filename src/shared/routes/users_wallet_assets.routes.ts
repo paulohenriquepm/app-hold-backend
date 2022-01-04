@@ -10,7 +10,7 @@ const usersWalletAssetsRouter = Router();
 usersWalletAssetsRouter.post('/', (request, response) => {
   return createUserWalletAssetController.handle(request, response);
 });
-usersWalletAssetsRouter.patch('/:user_wallet_id', (request, response) => {
+usersWalletAssetsRouter.patch('/:user_wallet_asset_id', (request, response) => {
   return updateUserWalletAssetQuantityController.handle(request, response);
 });
 usersWalletAssetsRouter.delete('/:id', (request, response) => {
