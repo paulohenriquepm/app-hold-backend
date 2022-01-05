@@ -54,6 +54,10 @@ class FakeUsersRepository implements IUsersRepository {
 
     return user;
   }
+
+  async destroy(user_id: number): Promise<void> {
+    this.users = this.users.filter(user => user.id !== user_id);
+  }
 }
 
 export { FakeUsersRepository };
