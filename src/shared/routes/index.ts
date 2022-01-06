@@ -9,6 +9,7 @@ import { yahooApiRouter } from './yahooApi.routes';
 
 import { assetsRouter } from './assets.routes';
 import { usersRouter } from './users.routes';
+import { usersPasswordRouter } from './users.password.routes';
 import { usersWalletAssetsRouter } from './users_wallet_assets.routes';
 
 const routes = Router();
@@ -19,6 +20,7 @@ routes.use('/yahooApi', ensureYahooApiAuthenticated, yahooApiRouter);
 
 routes.use('/assets', ensureAuthenticated, assetsRouter);
 routes.use('/users', ensureAuthenticated, usersRouter);
+routes.use('/password', usersPasswordRouter);
 routes.use(
   '/users-wallet-assets',
   ensureAuthenticated,
