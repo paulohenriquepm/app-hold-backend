@@ -11,13 +11,14 @@ generator client {
 }
 
 model User {
-  id         Int          @id @default(autoincrement())
-  name       String
-  email      String
-  password   String
-  created_at DateTime     @default(now())
-  updated_at DateTime     @updatedAt
-  wallet     UsersWallet?
+  id                        Int                         @id @default(autoincrement())
+  name                      String
+  email                     String
+  password                  String
+  created_at                DateTime                    @default(now())
+  updated_at                DateTime                    @updatedAt
+  wallet                    UsersWallet?
+  UsersForgotPasswordTokens UsersForgotPasswordTokens[]
 }
 
 model UsersWallet {
@@ -85,4 +86,14 @@ model UsersWalletAssets {
   userWallet   UsersWallet @relation(fields: [userWalletId], references: [id], onDelete: Cascade)
   created_at   DateTime    @default(now())
   updated_at   DateTime    @updatedAt
+}
+
+model UsersForgotPasswordTokens {
+  id         Int      @id @default(autoincrement())
+  token      String
+  userId     Int
+  expires_at DateTime
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
 }
