@@ -7,9 +7,9 @@ class ResetPasswordController implements IController {
   constructor(private readonly resetPasswordUseCase: IResetPasswordUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const { token, email, password } = request.body;
+    const { email, password } = request.body;
 
-    await this.resetPasswordUseCase.execute(token, email, password);
+    await this.resetPasswordUseCase.execute(email, password);
 
     return response.sendStatus(200);
   }

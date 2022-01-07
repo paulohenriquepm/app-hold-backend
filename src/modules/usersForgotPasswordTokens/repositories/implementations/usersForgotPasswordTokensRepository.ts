@@ -31,8 +31,6 @@ class UsersForgotPasswordTokensRepository
         },
       });
 
-    console.log(usersForgotPasswordTokens);
-
     return usersForgotPasswordTokens[0];
   }
 }
