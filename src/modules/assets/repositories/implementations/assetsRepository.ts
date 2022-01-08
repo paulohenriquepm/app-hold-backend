@@ -80,6 +80,18 @@ class AssetsRepository implements IAssetsRepository {
     return assets;
   }
 
+  async listSectors(): Promise<string[]> {
+    const sectors = await prisma.asset.findMany({
+      select: {
+        sector: true,
+      },
+      orderBy: { sector: 'asc' },
+      distinct: ['sector'],
+    });
+
+    return sectors.map(sector => sector.sector);
+  }
+
   async findByB3Ticket(b3_ticket: string): Promise<Asset> {
     const asset = await prisma.asset.findFirst({
       where: {

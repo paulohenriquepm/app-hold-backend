@@ -20,7 +20,7 @@ const createUserWalletAssetController = new CreateUserWalletAssetController(
   createUserWalletAssetUseCaseMock,
 );
 
-const request = mockRequest({ query: { includeAssetData: 'true' } });
+const request = mockRequest({});
 const response = mockResponse();
 
 const usersWalletAssetsRepository = new UsersWalletAssetsRepository();

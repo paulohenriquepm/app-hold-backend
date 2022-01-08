@@ -12,6 +12,7 @@ interface IAssetsRepository {
   findById(asset_id: number): Promise<Asset>;
   findByB3Ticket(b3_ticket: string): Promise<Asset>;
   list(filters: IListAssetsFilters): Promise<Asset[]>;
+  listSectors(): Promise<string[]>;
 }
 
 export { IAssetsRepository };
