@@ -6,6 +6,7 @@ import { IAssetsRepository } from '../IAssetsRepository';
 import { ICreateAssetDTO } from '@modules/assets/dtos/ICreateAssetDTO';
 import { IUpdateAssetDTO } from '@modules/assets/dtos/IUpdateAssetDTO';
 import { AppError } from '@shared/errors/AppError';
+import { IListAssetsFilters } from '@modules/assets/useCases/listAssets/listAssetsController';
 
 class AssetsRepository implements IAssetsRepository {
   async create(data: ICreateAssetDTO): Promise<Asset> {
@@ -39,31 +40,42 @@ class AssetsRepository implements IAssetsRepository {
     return asset;
   }
 
-  async list(searchAsset: string): Promise<Asset[]> {
-    if (searchAsset) {
-      const assets = await prisma.asset.findMany({
-        where: {
-          OR: [
-            {
-              b3_ticket: {
-                contains: searchAsset,
-                mode: 'insensitive',
-              },
-            },
-            {
-              name: {
-                contains: searchAsset,
-                mode: 'insensitive',
-              },
-            },
-          ],
-        },
-      });
+  async list(filters: IListAssetsFilters): Promise<Asset[]> {
+    let where = {};
 
-      return assets;
+    if (filters?.nameOrTicket) {
+      Object.assign(where, {
+        OR: [
+          {
+            b3_ticket: {
+              contains: filters.nameOrTicket,
+              mode: 'insensitive',
+            },
+          },
+          {
+            name: {
+              contains: filters.nameOrTicket,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      });
     }
 
-    const assets = await prisma.asset.findMany();
+    if (filters?.sector) {
+      Object.assign(where, {
+        sector: {
+          equals: filters.sector,
+        },
+      });
+    }
+
+    const assets = await prisma.asset.findMany({
+      where,
+      orderBy: {
+        name: 'asc',
+      },
+    });
 
     return assets;
   }

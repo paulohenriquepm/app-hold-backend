@@ -15,7 +15,7 @@ const listAssetsUseCaseMock =
   new ListAssetsUseCaseMock() as jest.Mocked<ListAssetsUseCase>;
 const listAssetsController = new ListAssetsController(listAssetsUseCaseMock);
 
-const request = mockRequest({ query: { searchAsset: '' } });
+const request = mockRequest({ query: { nameOrTicket: '', sector: '' } });
 const response = mockResponse();
 
 const assetsRepository = new AssetsRepository();

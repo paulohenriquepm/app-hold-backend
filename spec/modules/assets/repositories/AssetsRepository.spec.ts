@@ -29,9 +29,49 @@ describe('AssetsRepository', () => {
     });
 
     it('should return a list of assets', async () => {
-      const assets = await assetsRepository.list('');
+      const assets = await assetsRepository.list({
+        nameOrTicket: '',
+        sector: '',
+      });
 
       expect(assets.length).toBe(countAssets);
+    });
+
+    it('should return the asset with given name', async () => {
+      await assetFactory.create({ name: 'Weg' });
+
+      const assets = await assetsRepository.list({
+        nameOrTicket: 'Weg',
+        sector: '',
+      });
+
+      expect(assets.length).toEqual(1);
+      expect(assets[0].name).toEqual('Weg');
+    });
+
+    it('should return the asset with given ticket', async () => {
+      await assetFactory.create({ b3_ticket: 'WEGE3' });
+
+      const assets = await assetsRepository.list({
+        nameOrTicket: 'WEGE3',
+        sector: '',
+      });
+
+      expect(assets.length).toEqual(1);
+      expect(assets[0].b3_ticket).toEqual('WEGE3');
+    });
+
+    it('should return the assets with given sector', async () => {
+      await assetFactory.create({ name: 'Foo', sector: 'Technology' });
+      await assetFactory.create({ name: 'Bar', sector: 'Technology' });
+      await assetFactory.create({ name: 'Not-Foo', sector: 'Other' });
+
+      const assets = await assetsRepository.list({
+        nameOrTicket: '',
+        sector: 'Technology',
+      });
+
+      expect(assets.length).toEqual(2);
     });
   });
 
@@ -41,7 +81,10 @@ describe('AssetsRepository', () => {
 
       await assetFactory.createMany({}, countAssets);
 
-      const assets = await assetsRepository.list('');
+      const assets = await assetsRepository.list({
+        nameOrTicket: '',
+        sector: '',
+      });
 
       expect(assets.length).toBe(countAssets);
     });

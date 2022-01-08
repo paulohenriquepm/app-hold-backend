@@ -1,7 +1,9 @@
 import { Asset } from '@prisma/client';
 
+import { IListAssetsFilters } from './listAssetsController';
+
 interface IListAssetsUseCase {
-  execute(searchAsset: string): Promise<Asset[]>;
+  execute(filters: IListAssetsFilters): Promise<Asset[]>;
 }
 
 export { IListAssetsUseCase };
