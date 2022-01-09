@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "tsnd -r tsconfig-paths/register --inspect --ignore-watch node_modules --transpile-only --respawn --exit-child src/shared/server.ts",
     "build": "tsc",
+    "prestart": "yarn prisma migrate deploy --preview-feature",
+    "start": "tsnd dist/app.js",
     "test": "jest -i"
   },
   "dependencies": {

@@ -7,10 +7,7 @@ const usersRepository = new UsersRepository();
 const usersForgotPasswordTokensRepository =
   new UsersForgotPasswordTokensRepository();
 
-const resetPasswordUseCase = new ResetPasswordUseCase(
-  usersRepository,
-  usersForgotPasswordTokensRepository,
-);
+const resetPasswordUseCase = new ResetPasswordUseCase(usersRepository);
 
 const resetPasswordController = new ResetPasswordController(
   resetPasswordUseCase,

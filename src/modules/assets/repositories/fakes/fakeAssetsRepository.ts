@@ -3,6 +3,7 @@ import { Asset, Prisma } from '@prisma/client';
 import { IAssetsRepository } from '../IAssetsRepository';
 import { ICreateAssetDTO } from '@modules/assets/dtos/ICreateAssetDTO';
 import { IUpdateAssetDTO } from '@modules/assets/dtos/IUpdateAssetDTO';
+import { IListAssetsFilters } from '@modules/assets/useCases/listAssets/listAssetsController';
 
 class FakeAssetsRepository implements IAssetsRepository {
   assets: Asset[] = [];
@@ -35,8 +36,12 @@ class FakeAssetsRepository implements IAssetsRepository {
     return { count: data.length };
   }
 
-  async list(searchAsset: string): Promise<Asset[]> {
+  async list(filters: IListAssetsFilters): Promise<Asset[]> {
     return this.assets;
+  }
+
+  async listSectors(): Promise<string[]> {
+    return this.assets.map(asset => asset.sector);
   }
 
   async findByB3Ticket(b3_ticket: string): Promise<Asset> {

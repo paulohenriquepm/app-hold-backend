@@ -7,9 +7,9 @@ import { AppError } from '@shared/errors/AppError';
 
 import { routes } from './routes';
 
-BigInt.prototype.toJSON = function () {
-  return this.toString();
-};
+// BigInt.prototype.toJSON = function () {
+//   return this.toString();
+// };
 
 const app = express();
 
