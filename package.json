@@ -7,7 +7,7 @@
     "dev": "tsnd -r tsconfig-paths/register --inspect --ignore-watch node_modules --transpile-only --respawn --exit-child src/shared/server.ts",
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
     "prestart": "yarn prisma migrate deploy --preview-feature",
-    "start": "ts-node dist/app.js",
+    "start": "ts-node dist/src/shared/server.js",
     "test": "jest -i"
   },
   "dependencies": {
