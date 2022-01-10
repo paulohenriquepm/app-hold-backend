@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "tsnd -r tsconfig-paths/register --inspect --ignore-watch node_modules --transpile-only --respawn --exit-child src/shared/server.ts",
     "build": "tsc",
-    "prestart": "yarn build && yarn prisma migrate deploy --preview-feature",
-    "start": "tsnd dist/app.js",
+    "prestart": "yarn prisma migrate deploy --preview-feature",
+    "start": "ts-node dist/app.js",
     "test": "jest -i"
   },
   "dependencies": {
@@ -21,7 +21,8 @@
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.7.2",
     "reflect-metadata": "^0.1.13",
-    "supertest": "^6.1.6"
+    "supertest": "^6.1.6",
+    "ts-node": "^10.4.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
