@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-import { mockResponse } from '@utils/mockResponse';
-import { mockRequest } from '@utils/mockRequest';
+import { mockResponse } from '@spec-utils/mockResponse';
+import { mockRequest } from '@spec-utils/mockRequest';
 
 import { ListUserWalletAssetsController } from '@modules/usersWalletAssets/useCases/listUserWalletAssets/listUserWalletAssetsController';
 import { ListUserWalletAssetsUseCase } from '@modules/usersWalletAssets/useCases/listUserWalletAssets/listUserWalletAssetsUseCase';

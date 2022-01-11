@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
-import { mockResponse } from '@utils/mockResponse';
-import { mockRequest } from '@utils/mockRequest';
+import { mockResponse } from '@spec-utils/mockResponse';
+import { mockRequest } from '@spec-utils/mockRequest';
 
 import { UpdateUserController } from '@modules/users/useCases/updateUser/updateUserController';
 import { UpdateUserUseCase } from '@modules/users/useCases/updateUser/updateUserUseCase';

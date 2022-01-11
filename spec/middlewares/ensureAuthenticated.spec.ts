@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 
 import { AppError } from '@shared/errors/AppError';
 import { ensureAuthenticated } from '@shared/middlewares/ensureAuthenticated';
-import { mockRequest } from '@utils/mockRequest';
-import { next } from '@utils/mockNext';
+import { mockRequest } from '@spec-utils/mockRequest';
+import { next } from '@spec-utils/mockNext';
 
 describe('ensureAuthenticated', () => {
   describe('when authHeader is missing', () => {
