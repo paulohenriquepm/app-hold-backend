@@ -12,7 +12,7 @@
       "@factories/*": ["../spec/factories/*"],
       "@utils/*": ["../spec/utils/*"]
     },
-    "outDir": "dist",
+    "outDir": "./dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true

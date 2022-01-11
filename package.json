@@ -10,6 +10,9 @@
     "start": "ts-node dist/src/shared/server.js",
     "test": "jest -i"
   },
+  "engines": {
+    "node": "14.x"
+  },
   "dependencies": {
     "@prisma/client": "^3.2.0",
     "axios": "^0.24.0",
