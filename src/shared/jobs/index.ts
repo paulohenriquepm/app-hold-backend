@@ -29,5 +29,8 @@ const updateInfoFromAssets = new UpdateInfoFromAssets(
 // update asset price every hour
 cron.schedule('0 * * * *', async () => await updatePriceFromAssets.execute());
 
+// update asset price every hour
+cron.schedule('* * * * *', async () => console.log('funciona!!'));
+
 // update asset price every month
 cron.schedule('0 0 1 * *', async () => await updateInfoFromAssets.execute());
