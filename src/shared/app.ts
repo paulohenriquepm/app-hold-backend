@@ -7,6 +7,7 @@ import { AppError } from '@shared/errors/AppError';
 
 import { routes } from './routes';
 
+// Cron Jobs
 import './jobs/index';
 
 BigInt.prototype.toJSON = function () {

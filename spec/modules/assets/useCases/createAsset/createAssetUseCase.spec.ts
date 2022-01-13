@@ -1,5 +1,3 @@
-import { AppError } from '@shared/errors/AppError';
-
 import { AssetFactory } from '@factories/assetFactory';
 
 import { AssetsRepository } from '@modules/assets/repositories/implementations/assetsRepository';
