@@ -12,62 +12,127 @@ const mapAssetDataByQuarterToImport = (
   index: number,
 ) => {
   const assetData = {
-    revenue: BigInt(
-      apiResponseData.quoteSummary.result[0].incomeStatementHistoryQuarterly
-        .incomeStatementHistory[index].totalRevenue.raw,
-    ),
-    net_income: BigInt(
-      apiResponseData.quoteSummary.result[0].cashflowStatementHistoryQuarterly
-        .cashflowStatements[index].netIncome.raw,
-    ),
-    dividends_paid: BigInt(
-      apiResponseData.quoteSummary.result[0].cashflowStatementHistoryQuarterly
-        .cashflowStatements[index].dividendsPaid.raw * -1,
-    ),
-    fco: BigInt(
-      apiResponseData.quoteSummary.result[0].cashflowStatementHistoryQuarterly
-        .cashflowStatements[index].totalCashFromOperatingActivities.raw,
-    ),
-    fcf: BigInt(
-      apiResponseData.quoteSummary.result[0].cashflowStatementHistoryQuarterly
-        .cashflowStatements[index].totalCashFromFinancingActivities.raw * -1,
-    ),
-    ebit: BigInt(
-      apiResponseData.quoteSummary.result[0].incomeStatementHistoryQuarterly
-        .incomeStatementHistory[index].ebit.raw,
-    ),
-    cash: BigInt(
-      apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
-        .balanceSheetStatements[index].cash.raw,
-    ),
-    equity: calculateEquity(
-      apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
-        .balanceSheetStatements[index].minorityInterest.raw,
-      apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
-        .balanceSheetStatements[index].totalStockholderEquity.raw,
-    ),
-    net_margin: calculateNetMargin(
-      apiResponseData.quoteSummary.result[0].cashflowStatementHistoryQuarterly
-        .cashflowStatements[index].netIncome.raw,
-      apiResponseData.quoteSummary.result[0].incomeStatementHistoryQuarterly
-        .incomeStatementHistory[index].totalRevenue.raw,
-    ),
-    roe: calculateRoe(
-      apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
-        .balanceSheetStatements[index].minorityInterest.raw,
-      apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
-        .balanceSheetStatements[index].totalStockholderEquity.raw,
-      BigInt(
-        apiResponseData.quoteSummary.result[0].cashflowStatementHistoryQuarterly
-          .cashflowStatements[index].netIncome.raw,
-      ),
-    ),
-    payout: calculatePayout(
-      apiResponseData.quoteSummary.result[0].cashflowStatementHistoryQuarterly
-        .cashflowStatements[index].dividendsPaid.raw,
-      apiResponseData.quoteSummary.result[0].cashflowStatementHistoryQuarterly
-        .cashflowStatements[index].netIncome.raw,
-    ),
+    revenue: apiResponseData.quoteSummary.result[0]
+      ?.incomeStatementHistoryQuarterly?.incomeStatementHistory[index]
+      ?.totalRevenue?.raw
+      ? BigInt(
+          apiResponseData.quoteSummary.result[0].incomeStatementHistoryQuarterly
+            .incomeStatementHistory[index].totalRevenue.raw,
+        )
+      : null,
+    net_income: apiResponseData.quoteSummary.result[0]
+      ?.cashflowStatementHistoryQuarterly?.cashflowStatements[index]?.netIncome
+      ?.raw
+      ? BigInt(
+          apiResponseData.quoteSummary.result[0]
+            .cashflowStatementHistoryQuarterly.cashflowStatements[index]
+            .netIncome.raw,
+        )
+      : null,
+    dividends_paid: apiResponseData.quoteSummary.result[0]
+      ?.cashflowStatementHistoryQuarterly?.cashflowStatements[index]
+      ?.dividendsPaid?.raw
+      ? BigInt(
+          apiResponseData.quoteSummary.result[0]
+            .cashflowStatementHistoryQuarterly.cashflowStatements[index]
+            .dividendsPaid.raw * -1,
+        )
+      : null,
+    fco: apiResponseData.quoteSummary.result[0]
+      ?.cashflowStatementHistoryQuarterly?.cashflowStatements[index]
+      ?.totalCashFromOperatingActivities?.raw
+      ? BigInt(
+          apiResponseData.quoteSummary.result[0]
+            .cashflowStatementHistoryQuarterly.cashflowStatements[index]
+            ?.totalCashFromOperatingActivities?.raw,
+        )
+      : null,
+    fcf: apiResponseData.quoteSummary.result[0]
+      ?.cashflowStatementHistoryQuarterly?.cashflowStatements[index]
+      ?.totalCashFromFinancingActivities?.raw
+      ? BigInt(
+          apiResponseData.quoteSummary.result[0]
+            .cashflowStatementHistoryQuarterly.cashflowStatements[index]
+            .totalCashFromFinancingActivities.raw * -1,
+        )
+      : null,
+    ebit: apiResponseData.quoteSummary.result[0]
+      ?.incomeStatementHistoryQuarterly?.incomeStatementHistory[index]?.ebit
+      ?.raw
+      ? BigInt(
+          apiResponseData.quoteSummary.result[0].incomeStatementHistoryQuarterly
+            .incomeStatementHistory[index].ebit.raw,
+        )
+      : null,
+    cash: apiResponseData.quoteSummary.result[0]?.balanceSheetHistoryQuarterly
+      ?.balanceSheetStatements[index]?.cash?.raw
+      ? BigInt(
+          apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
+            .balanceSheetStatements[index].cash.raw,
+        )
+      : null,
+    equity:
+      apiResponseData?.quoteSummary?.result[0]?.balanceSheetHistoryQuarterly
+        ?.balanceSheetStatements[index]?.minorityInterest?.raw &&
+      apiResponseData?.quoteSummary?.result[0]?.balanceSheetHistoryQuarterly
+        ?.balanceSheetStatements[index]?.totalStockholderEquity?.raw
+        ? calculateEquity(
+            apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
+              .balanceSheetStatements[index].minorityInterest.raw,
+            apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
+              .balanceSheetStatements[index].totalStockholderEquity.raw,
+          )
+        : null,
+    net_margin:
+      apiResponseData?.quoteSummary.result[0]?.cashflowStatementHistoryQuarterly
+        ?.cashflowStatements[index]?.netIncome?.raw &&
+      apiResponseData?.quoteSummary?.result[0]?.incomeStatementHistoryQuarterly
+        ?.incomeStatementHistory[index]?.totalRevenue?.raw
+        ? calculateNetMargin(
+            apiResponseData.quoteSummary.result[0]
+              .cashflowStatementHistoryQuarterly.cashflowStatements[index]
+              .netIncome.raw,
+            apiResponseData.quoteSummary.result[0]
+              .incomeStatementHistoryQuarterly.incomeStatementHistory[index]
+              .totalRevenue.raw,
+          )
+        : null,
+    roe:
+      apiResponseData?.quoteSummary?.result[0]?.balanceSheetHistoryQuarterly
+        ?.balanceSheetStatements[index]?.minorityInterest?.raw &&
+      apiResponseData?.quoteSummary?.result[0]?.balanceSheetHistoryQuarterly
+        ?.balanceSheetStatements[index]?.totalStockholderEquity?.raw &&
+      apiResponseData?.quoteSummary?.result[0]
+        ?.cashflowStatementHistoryQuarterly?.cashflowStatements[index]
+        ?.netIncome?.raw
+        ? calculateRoe(
+            apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
+              .balanceSheetStatements[index].minorityInterest.raw,
+            apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
+              .balanceSheetStatements[index].totalStockholderEquity.raw,
+            BigInt(
+              apiResponseData.quoteSummary.result[0]
+                .cashflowStatementHistoryQuarterly.cashflowStatements[index]
+                .netIncome.raw,
+            ),
+          )
+        : null,
+    payout:
+      apiResponseData?.quoteSummary?.result[0]
+        ?.cashflowStatementHistoryQuarterly?.cashflowStatements[index]
+        ?.dividendsPaid?.raw &&
+      apiResponseData?.quoteSummary?.result[0]
+        ?.cashflowStatementHistoryQuarterly?.cashflowStatements[index]
+        ?.netIncome?.raw
+        ? calculatePayout(
+            apiResponseData.quoteSummary.result[0]
+              .cashflowStatementHistoryQuarterly.cashflowStatements[index]
+              .dividendsPaid.raw,
+            apiResponseData.quoteSummary.result[0]
+              .cashflowStatementHistoryQuarterly.cashflowStatements[index]
+              .netIncome.raw,
+          )
+        : null,
     year: getYear(
       apiResponseData.quoteSummary.result[0].balanceSheetHistoryQuarterly
         .balanceSheetStatements[index].endDate.raw,

@@ -17,6 +17,7 @@ const createAssetDataUseCase = new CreateAssetDataUseCase(assetsDataRepository);
 const importDataUseCase = new ImportDataUseCase(
   assetsToImport,
   yahooApi,
+  assetsRepository,
   createAssetUseCase,
   createAssetDataUseCase,
 );

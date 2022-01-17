@@ -37,16 +37,17 @@ model Asset {
   b3_ticket                String
   api_ticket               String
   sector                   String
+  industry                 String?
   address                  String
   city                     String
-  state                    String
+  state                    String?
   country                  String
-  zip                      String
-  website                  String
-  employees                Int
-  ceo                      String
-  total_stocks             BigInt
-  last_12_months_dividends BigInt
+  zip                      String?
+  website                  String?
+  employees                Int?
+  ceo                      String?
+  total_stocks             BigInt?
+  last_12_months_dividends BigInt?
   price                    Float
   AssetData                AssetData[]
   created_at               DateTime            @default(now())
@@ -58,17 +59,17 @@ model Asset {
 
 model AssetData {
   id             Int      @id @default(autoincrement())
-  revenue        BigInt
-  net_income     BigInt
-  dividends_paid BigInt
-  fco            BigInt
-  fcf            BigInt
-  ebit           BigInt
-  cash           BigInt
-  equity         BigInt
-  net_margin     Int
+  revenue        BigInt?
+  net_income     BigInt?
+  dividends_paid BigInt?
+  fco            BigInt?
+  fcf            BigInt?
+  ebit           BigInt?
+  cash           BigInt?
+  equity         BigInt?
+  net_margin     Int?
   roe            Int?
-  payout         Int
+  payout         Int?
   year           Int
   quarter        Int?
   assetId        Int

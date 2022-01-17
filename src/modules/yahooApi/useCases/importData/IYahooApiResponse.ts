@@ -5,13 +5,14 @@ interface ICompanyOfficers {
 interface IAssetProfile {
   address1: string;
   city: string;
-  state: string;
+  state?: string;
   country: string;
-  zip: string;
-  website: string;
+  zip?: string;
+  website?: string;
   sector: string;
-  fullTimeEmployees: number;
-  companyOfficers: [ICompanyOfficers];
+  industry?: string;
+  fullTimeEmployees?: number;
+  companyOfficers?: [ICompanyOfficers];
 }
 
 interface IRawAndFormattedApiValues {
@@ -22,7 +23,7 @@ interface IRawAndFormattedApiValues {
 interface ICashflowStatementHistory {
   endDate: IRawAndFormattedApiValues;
   netIncome: IRawAndFormattedApiValues;
-  dividendsPaid: IRawAndFormattedApiValues;
+  dividendsPaid?: IRawAndFormattedApiValues;
   totalCashFromOperatingActivities: IRawAndFormattedApiValues;
   totalCashFromFinancingActivities: IRawAndFormattedApiValues;
 }

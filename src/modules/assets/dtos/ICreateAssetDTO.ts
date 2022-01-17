@@ -4,16 +4,17 @@ interface ICreateAssetDTO {
   b3_ticket: string;
   api_ticket: string;
   sector: string;
+  industry?: string;
   address: string;
   city: string;
-  state: string;
+  state?: string;
   country: string;
-  zip: string;
-  website: string;
-  employees: number;
-  ceo: string;
-  total_stocks: bigint;
-  last_12_months_dividends: bigint;
+  zip?: string;
+  website?: string;
+  employees?: number;
+  ceo?: string;
+  total_stocks?: bigint;
+  last_12_months_dividends?: bigint;
   price: number;
 }
 

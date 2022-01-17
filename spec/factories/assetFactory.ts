@@ -14,6 +14,7 @@ class AssetFactory {
       b3_ticket: chance.prefix(),
       api_ticket: chance.prefix(),
       sector: chance.name(),
+      industry: chance.name(),
       address: chance.address(),
       city: chance.city(),
       state: chance.state(),
