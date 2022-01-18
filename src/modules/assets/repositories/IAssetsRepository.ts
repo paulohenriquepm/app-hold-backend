@@ -11,7 +11,10 @@ interface IAssetsRepository {
   update(asset_id: number, data: IUpdateAssetDTO): Promise<Asset>;
   findById(asset_id: number): Promise<Asset>;
   findByB3Ticket(b3_ticket: string): Promise<Asset>;
-  list(filters: IListAssetsFilters): Promise<Asset[]>;
+  list(
+    filters: IListAssetsFilters,
+    orderBy?: Prisma.AssetOrderByWithRelationInput,
+  ): Promise<Asset[]>;
   listSectors(): Promise<string[]>;
 }
 

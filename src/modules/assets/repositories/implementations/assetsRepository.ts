@@ -40,7 +40,10 @@ class AssetsRepository implements IAssetsRepository {
     return asset;
   }
 
-  async list(filters: IListAssetsFilters): Promise<Asset[]> {
+  async list(
+    filters: IListAssetsFilters,
+    orderBy = { market_value: 'desc' } as Prisma.AssetOrderByWithRelationInput,
+  ): Promise<Asset[]> {
     let where = {};
 
     if (filters?.nameOrTicket) {
@@ -72,9 +75,7 @@ class AssetsRepository implements IAssetsRepository {
 
     const assets = await prisma.asset.findMany({
       where,
-      orderBy: {
-        name: 'asc',
-      },
+      orderBy,
     });
 
     return assets;

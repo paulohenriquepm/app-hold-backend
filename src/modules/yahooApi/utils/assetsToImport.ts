@@ -92,12 +92,6 @@ const assetsToImport = [
     logo: '',
   },
   {
-    name: 'Raízen',
-    b3_ticket: 'RAIZ4',
-    api_ticket: 'RAIZ4.SA',
-    logo: '',
-  },
-  {
     name: 'Gol',
     b3_ticket: 'GOLL4',
     api_ticket: 'GOLL4.SA',
@@ -632,12 +626,6 @@ const assetsToImport = [
     logo: '',
   },
   {
-    name: 'Omega Energia',
-    b3_ticket: 'MEGA3',
-    api_ticket: 'MEGA3.SA',
-    logo: '',
-  },
-  {
     name: 'Via',
     b3_ticket: 'VIIA3',
     api_ticket: 'VIIA3.SA',
@@ -1139,12 +1127,6 @@ const assetsToImport = [
     name: 'Banco BMG',
     b3_ticket: 'BMGB4',
     api_ticket: 'BMGB4.SA',
-    logo: '',
-  },
-  {
-    name: 'Vittia',
-    b3_ticket: 'VITT3',
-    api_ticket: 'VITT3.SA',
     logo: '',
   },
   {

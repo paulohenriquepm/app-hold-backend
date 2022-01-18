@@ -1,5 +1,6 @@
 import { IUpdateAssetDTO } from '@modules/assets/dtos/IUpdateAssetDTO';
 import { IYahooApiResponseData } from '../useCases/importData/IYahooApiResponse';
+import { calculateMarketValue } from './calculateMarketValue';
 
 import { IAssetToImport } from './IAssetToImport';
 
@@ -32,6 +33,16 @@ const mapAssetToUpdate = (
       ? BigInt(
           apiResponseData.quoteSummary.result[0].defaultKeyStatistics
             .sharesOutstanding.raw,
+        )
+      : null,
+    market_value: apiResponseData.quoteSummary.result[0]?.defaultKeyStatistics
+      ?.sharesOutstanding?.raw
+      ? BigInt(
+          calculateMarketValue(
+            apiResponseData.quoteSummary.result[0].defaultKeyStatistics
+              .sharesOutstanding.raw,
+            apiResponseData.quoteSummary.result[0].price.regularMarketPrice.raw,
+          ),
         )
       : null,
     last_12_months_dividends: apiResponseData.quoteSummary.result[0]

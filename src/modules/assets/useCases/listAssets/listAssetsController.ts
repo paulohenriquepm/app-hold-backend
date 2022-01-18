@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import { Request, Response } from 'express';
 
 import { IController } from '@shared/interfaces/IController';
@@ -12,14 +13,19 @@ class ListAssetsController implements IController {
   constructor(private readonly listAssetsUseCase: IListAssetsUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const { nameOrTicket, sector } = request.query as any;
+    const { nameOrTicket, sector, orderByField, orderByDirection } =
+      request.query as any;
 
     const filters = {
       nameOrTicket,
       sector,
     } as IListAssetsFilters;
 
-    const assets = await this.listAssetsUseCase.execute(filters);
+    const orderBy = {
+      [orderByField]: orderByDirection,
+    } as Prisma.AssetOrderByWithRelationInput;
+
+    const assets = await this.listAssetsUseCase.execute(filters, orderBy);
 
     return response.json(assets);
   }

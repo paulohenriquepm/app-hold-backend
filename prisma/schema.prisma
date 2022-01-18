@@ -48,6 +48,7 @@ model Asset {
   ceo                      String?
   total_stocks             BigInt?
   last_12_months_dividends BigInt?
+  market_value             BigInt?
   price                    Float
   AssetData                AssetData[]
   created_at               DateTime            @default(now())
