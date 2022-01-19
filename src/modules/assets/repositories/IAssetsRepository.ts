@@ -4,7 +4,13 @@ import { ICreateAssetDTO } from '../dtos/ICreateAssetDTO';
 import { IUpdateAssetDTO } from '../dtos/IUpdateAssetDTO';
 
 import { IListAssetsFilters } from '../useCases/listAssets/listAssetsController';
+import { FilterOptions } from '../useCases/listAssetsFilterOptions/IListAssetsFilterOptionsUseCase';
 
+export type AssetsListResponse = {
+  assets: Asset[];
+  nextCursorId: number | undefined;
+  totalCount: number;
+};
 interface IAssetsRepository {
   create(data: ICreateAssetDTO): Promise<Asset>;
   createMany(data: ICreateAssetDTO[]): Promise<Prisma.BatchPayload>;
@@ -14,8 +20,9 @@ interface IAssetsRepository {
   list(
     filters: IListAssetsFilters,
     orderBy?: Prisma.AssetOrderByWithRelationInput,
-  ): Promise<Asset[]>;
-  listSectors(): Promise<string[]>;
+    nextCursor?: string,
+  ): Promise<AssetsListResponse>;
+  listFilterOptions(): Promise<FilterOptions>;
 }
 
 export { IAssetsRepository };

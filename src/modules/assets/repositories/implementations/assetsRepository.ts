@@ -2,11 +2,12 @@ import { Asset, Prisma } from '@prisma/client';
 
 import prisma from '@shared/db/prisma';
 
-import { IAssetsRepository } from '../IAssetsRepository';
+import { AssetsListResponse, IAssetsRepository } from '../IAssetsRepository';
 import { ICreateAssetDTO } from '@modules/assets/dtos/ICreateAssetDTO';
 import { IUpdateAssetDTO } from '@modules/assets/dtos/IUpdateAssetDTO';
 import { AppError } from '@shared/errors/AppError';
 import { IListAssetsFilters } from '@modules/assets/useCases/listAssets/listAssetsController';
+import { FilterOptions } from '@modules/assets/useCases/listAssetsFilterOptions/IListAssetsFilterOptionsUseCase';
 
 class AssetsRepository implements IAssetsRepository {
   async create(data: ICreateAssetDTO): Promise<Asset> {
@@ -43,7 +44,11 @@ class AssetsRepository implements IAssetsRepository {
   async list(
     filters: IListAssetsFilters,
     orderBy = { market_value: 'desc' } as Prisma.AssetOrderByWithRelationInput,
-  ): Promise<Asset[]> {
+    nextCursor = '',
+  ): Promise<AssetsListResponse> {
+    const cursorObj =
+      nextCursor === '' ? undefined : { id: parseInt(nextCursor) };
+    const limit = 20;
     let where = {};
 
     if (filters?.nameOrTicket) {
@@ -65,6 +70,16 @@ class AssetsRepository implements IAssetsRepository {
       });
     }
 
+    if (filters.onlyAssetsThatCanCalculateDividend) {
+      Object.assign(where, {
+        NOT: {
+          last_12_months_dividends: {
+            equals: null,
+          },
+        },
+      });
+    }
+
     if (filters?.sector) {
       Object.assign(where, {
         sector: {
@@ -73,16 +88,35 @@ class AssetsRepository implements IAssetsRepository {
       });
     }
 
+    if (filters?.industry) {
+      Object.assign(where, {
+        industry: {
+          equals: filters.industry,
+        },
+      });
+    }
+
+    const totalCount = await prisma.asset.count({
+      where,
+    });
+
     const assets = await prisma.asset.findMany({
+      take: limit,
+      cursor: cursorObj,
+      skip: nextCursor === '' ? 0 : 1,
       where,
       orderBy,
     });
 
-    return assets;
+    return {
+      assets,
+      totalCount,
+      nextCursorId: assets.length === limit ? assets[limit - 1].id : undefined,
+    };
   }
 
-  async listSectors(): Promise<string[]> {
-    const sectors = await prisma.asset.findMany({
+  async listFilterOptions(): Promise<FilterOptions> {
+    const sectorsFiltered = await prisma.asset.findMany({
       select: {
         sector: true,
       },
@@ -90,7 +124,21 @@ class AssetsRepository implements IAssetsRepository {
       distinct: ['sector'],
     });
 
-    return sectors.map(sector => sector.sector);
+    const industriesFiltered = await prisma.asset.findMany({
+      select: {
+        industry: true,
+      },
+      orderBy: { industry: 'asc' },
+      distinct: ['industry'],
+    });
+
+    const sectors = sectorsFiltered.map(sector => sector.sector);
+    const industries = industriesFiltered.map(industry => industry.industry);
+
+    return {
+      sectors,
+      industries,
+    };
   }
 
   async findByB3Ticket(b3_ticket: string): Promise<Asset> {

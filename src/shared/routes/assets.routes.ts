@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { listAssetsController } from '@modules/assets/useCases/listAssets';
 import { showAssetController } from '@modules/assets/useCases/showAsset';
-import { listAssetsSectorsController } from '@modules/assets/useCases/listAssetsSectors';
+import { listAssetsFilterOptionsController } from '@modules/assets/useCases/listAssetsFilterOptions';
 import { AssetsDataRepository } from '@modules/assetsData/repositories/implementations/assetsDataRepository';
 
 const assetsRouter = Router();
@@ -15,12 +15,8 @@ assetsRouter.get('/', (request, response) => {
 assetsRouter.get('/:id', (request, response) => {
   return showAssetController.handle(request, response);
 });
-assetsRouter.get('/teste/teste', async (request, response) => {
-  const a = await assetsDataRepository.findByAssetIdYearQuarter(123, 2021, 9);
-  return response.json(a);
-});
-assetsRouter.get('/select/sectors', (request, response) => {
-  return listAssetsSectorsController.handle(request, response);
+assetsRouter.get('/filter/all-options', (request, response) => {
+  return listAssetsFilterOptionsController.handle(request, response);
 });
 
 export { assetsRouter };
