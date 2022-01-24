@@ -11,7 +11,7 @@ class GmailMailProvider implements IMailProvider {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'app.and.hold@gmail.com',
+        user: process.env.GMAIL_EMAIL,
         pass: process.env.GMAIL_PASSWORD,
       },
     });
