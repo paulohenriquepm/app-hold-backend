@@ -40,6 +40,20 @@ class UsersWalletAssetsRepository implements IUsersWalletAssetsRepository {
     return userWalletAsset;
   }
 
+  async findByUserWalletIdAndAssetId(
+    user_wallet_id: number,
+    asset_id: number,
+  ): Promise<UsersWalletAssets> {
+    const userWalletAsset = await prisma.usersWalletAssets.findFirst({
+      where: {
+        userWalletId: user_wallet_id,
+        assetId: asset_id,
+      },
+    });
+
+    return userWalletAsset;
+  }
+
   async create(data: ICreateUsersWalletAssetsDTO): Promise<UsersWalletAssets> {
     const userWalletAsset = await prisma.usersWalletAssets.create({
       data,

@@ -10,6 +10,23 @@ class CreateUserWalletAssetUseCase implements ICreateUserWalletAssetUseCase {
   ) {}
 
   async execute(data: ICreateUsersWalletAssetsDTO): Promise<UsersWalletAssets> {
+    const assetAlreadyExistsInWallet =
+      await this.usersWalletAssetsRepository.findByUserWalletIdAndAssetId(
+        data.userWalletId,
+        data.assetId,
+      );
+
+    if (assetAlreadyExistsInWallet) {
+      await this.usersWalletAssetsRepository.update(
+        assetAlreadyExistsInWallet.id,
+        {
+          quantity: assetAlreadyExistsInWallet.quantity + 1,
+        },
+      );
+
+      return;
+    }
+
     const userWalletAssetExists = await this.usersWalletAssetsRepository.create(
       data,
     );

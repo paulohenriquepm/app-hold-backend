@@ -10,7 +10,7 @@ class UpdatePriceFromAssets {
   ) {}
 
   async execute(): Promise<void> {
-    const assets = await this.assetsRepository.list({});
+    const { assets } = await this.assetsRepository.list({});
 
     for (let i = 0; i < assets.length; i++) {
       const assetToUpdate = assets[i];
