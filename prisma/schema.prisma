@@ -53,8 +53,6 @@ model Asset {
   AssetData                AssetData[]
   created_at               DateTime            @default(now())
   updated_at               DateTime            @updatedAt
-  last_time_data_updated   DateTime            @default(now())
-  last_time_price_updated  DateTime            @default(now())
   UsersWalletAssets        UsersWalletAssets[]
 }
 
